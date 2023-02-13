@@ -28,122 +28,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.Button_ReadFromUserArea = new System.Windows.Forms.Button();
-            this.Button_WriteToUserArea = new System.Windows.Forms.Button();
-            this.Button_ClearDisplay = new System.Windows.Forms.Button();
-            this.Button_ShowImage = new System.Windows.Forms.Button();
-            this.Label_IDm = new System.Windows.Forms.Label();
-            this.Label_Message = new System.Windows.Forms.Label();
-            this.TextBox_Log = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.Label_Version = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.patternToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.instructionManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licensedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlForm = new System.Windows.Forms.Panel();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Button_ReadFromUserArea
+            // menuStrip1
             // 
-            this.Button_ReadFromUserArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_ReadFromUserArea.Location = new System.Drawing.Point(620, 72);
-            this.Button_ReadFromUserArea.Name = "Button_ReadFromUserArea";
-            this.Button_ReadFromUserArea.Size = new System.Drawing.Size(163, 56);
-            this.Button_ReadFromUserArea.TabIndex = 14;
-            this.Button_ReadFromUserArea.Text = "Read From User Area";
-            this.Button_ReadFromUserArea.UseVisualStyleBackColor = true;
-            this.Button_ReadFromUserArea.Click += new System.EventHandler(this.Button_ReadFromUserArea_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.toolToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1027, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // Button_WriteToUserArea
+            // fileToolStripMenuItem
             // 
-            this.Button_WriteToUserArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_WriteToUserArea.Location = new System.Drawing.Point(438, 71);
-            this.Button_WriteToUserArea.Name = "Button_WriteToUserArea";
-            this.Button_WriteToUserArea.Size = new System.Drawing.Size(163, 56);
-            this.Button_WriteToUserArea.TabIndex = 13;
-            this.Button_WriteToUserArea.Text = "Write To User Area";
-            this.Button_WriteToUserArea.UseVisualStyleBackColor = true;
-            this.Button_WriteToUserArea.Click += new System.EventHandler(this.Button_WriteToUserArea_Click);
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
             // 
-            // Button_ClearDisplay
+            // startToolStripMenuItem
             // 
-            this.Button_ClearDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_ClearDisplay.Location = new System.Drawing.Point(256, 72);
-            this.Button_ClearDisplay.Name = "Button_ClearDisplay";
-            this.Button_ClearDisplay.Size = new System.Drawing.Size(163, 56);
-            this.Button_ClearDisplay.TabIndex = 12;
-            this.Button_ClearDisplay.Text = "Clear Display";
-            this.Button_ClearDisplay.UseVisualStyleBackColor = true;
-            this.Button_ClearDisplay.Click += new System.EventHandler(this.Button_ClearDisplay_Click);
+            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startToolStripMenuItem.Text = "Start";
+            this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
-            // Button_ShowImage
+            // toolStripMenuItem1
             // 
-            this.Button_ShowImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_ShowImage.Location = new System.Drawing.Point(74, 72);
-            this.Button_ShowImage.Name = "Button_ShowImage";
-            this.Button_ShowImage.Size = new System.Drawing.Size(163, 56);
-            this.Button_ShowImage.TabIndex = 11;
-            this.Button_ShowImage.Text = "Show Image";
-            this.Button_ShowImage.UseVisualStyleBackColor = true;
-            this.Button_ShowImage.Click += new System.EventHandler(this.Button_ShowImage_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(95, 6);
             // 
-            // Label_IDm
+            // exitToolStripMenuItem
             // 
-            this.Label_IDm.AutoSize = true;
-            this.Label_IDm.Location = new System.Drawing.Point(39, 142);
-            this.Label_IDm.Name = "Label_IDm";
-            this.Label_IDm.Size = new System.Drawing.Size(35, 13);
-            this.Label_IDm.TabIndex = 10;
-            this.Label_IDm.Text = "IDm : ";
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // Label_Message
+            // toolToolStripMenuItem
             // 
-            this.Label_Message.AutoSize = true;
-            this.Label_Message.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Message.Location = new System.Drawing.Point(16, 15);
-            this.Label_Message.Name = "Label_Message";
-            this.Label_Message.Size = new System.Drawing.Size(182, 25);
-            this.Label_Message.TabIndex = 9;
-            this.Label_Message.Text = "No Reader Found";
+            this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrationToolStripMenuItem,
+            this.comportToolStripMenuItem,
+            this.patternToolStripMenuItem});
+            this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
+            this.toolToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.toolToolStripMenuItem.Text = "Tool";
             // 
-            // TextBox_Log
+            // registrationToolStripMenuItem
             // 
-            this.TextBox_Log.Location = new System.Drawing.Point(42, 171);
-            this.TextBox_Log.Multiline = true;
-            this.TextBox_Log.Name = "TextBox_Log";
-            this.TextBox_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBox_Log.Size = new System.Drawing.Size(743, 265);
-            this.TextBox_Log.TabIndex = 8;
+            this.registrationToolStripMenuItem.Name = "registrationToolStripMenuItem";
+            this.registrationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrationToolStripMenuItem.Text = "Registration";
+            this.registrationToolStripMenuItem.Click += new System.EventHandler(this.registrationToolStripMenuItem_Click);
             // 
-            // timer
+            // comportToolStripMenuItem
             // 
-            this.timer.Interval = 250;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.comportToolStripMenuItem.Name = "comportToolStripMenuItem";
+            this.comportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.comportToolStripMenuItem.Text = "Comport";
+            this.comportToolStripMenuItem.Click += new System.EventHandler(this.comportToolStripMenuItem_Click);
             // 
-            // Label_Version
+            // patternToolStripMenuItem
             // 
-            this.Label_Version.AutoSize = true;
-            this.Label_Version.Location = new System.Drawing.Point(565, 35);
-            this.Label_Version.Name = "Label_Version";
-            this.Label_Version.Size = new System.Drawing.Size(74, 13);
-            this.Label_Version.TabIndex = 15;
-            this.Label_Version.Text = "Label_Version";
+            this.patternToolStripMenuItem.Name = "patternToolStripMenuItem";
+            this.patternToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.patternToolStripMenuItem.Text = "Pattern";
+            this.patternToolStripMenuItem.Click += new System.EventHandler(this.patternToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.instructionManualToolStripMenuItem,
+            this.licensedToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // instructionManualToolStripMenuItem
+            // 
+            this.instructionManualToolStripMenuItem.Name = "instructionManualToolStripMenuItem";
+            this.instructionManualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.instructionManualToolStripMenuItem.Text = "Instruction manual";
+            this.instructionManualToolStripMenuItem.Click += new System.EventHandler(this.instructionManualToolStripMenuItem_Click);
+            // 
+            // licensedToolStripMenuItem
+            // 
+            this.licensedToolStripMenuItem.Name = "licensedToolStripMenuItem";
+            this.licensedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licensedToolStripMenuItem.Text = "About";
+            this.licensedToolStripMenuItem.Click += new System.EventHandler(this.licensedToolStripMenuItem_Click);
+            // 
+            // pnlForm
+            // 
+            this.pnlForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlForm.Location = new System.Drawing.Point(0, 24);
+            this.pnlForm.Name = "pnlForm";
+            this.pnlForm.Size = new System.Drawing.Size(1027, 510);
+            this.pnlForm.TabIndex = 1;
             // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Button_ReadFromUserArea);
-            this.Controls.Add(this.Button_WriteToUserArea);
-            this.Controls.Add(this.Button_ClearDisplay);
-            this.Controls.Add(this.Button_ShowImage);
-            this.Controls.Add(this.Label_IDm);
-            this.Controls.Add(this.Label_Message);
-            this.Controls.Add(this.TextBox_Log);
-            this.Controls.Add(this.Label_Version);
+            this.ClientSize = new System.Drawing.Size(1027, 534);
+            this.Controls.Add(this.pnlForm);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainFrm";
-            this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFrm_FormClosing);
+            this.Text = "SmartCardTool";
             this.Load += new System.EventHandler(this.MainFrm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,16 +167,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Button Button_ReadFromUserArea;
-        private System.Windows.Forms.Button Button_WriteToUserArea;
-        private System.Windows.Forms.Button Button_ClearDisplay;
-        private System.Windows.Forms.Button Button_ShowImage;
-        private System.Windows.Forms.Label Label_IDm;
-        private System.Windows.Forms.Label Label_Message;
-        private System.Windows.Forms.TextBox TextBox_Log;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Label Label_Version;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem patternToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem instructionManualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem licensedToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlForm;
     }
 }
-
