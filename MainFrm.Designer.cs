@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,7 @@
             this.instructionManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licensedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlForm = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -81,7 +83,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -98,21 +100,21 @@
             // registrationToolStripMenuItem
             // 
             this.registrationToolStripMenuItem.Name = "registrationToolStripMenuItem";
-            this.registrationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.registrationToolStripMenuItem.Text = "Registration";
             this.registrationToolStripMenuItem.Click += new System.EventHandler(this.registrationToolStripMenuItem_Click);
             // 
             // comportToolStripMenuItem
             // 
             this.comportToolStripMenuItem.Name = "comportToolStripMenuItem";
-            this.comportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.comportToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.comportToolStripMenuItem.Text = "Comport";
             this.comportToolStripMenuItem.Click += new System.EventHandler(this.comportToolStripMenuItem_Click);
             // 
             // patternToolStripMenuItem
             // 
             this.patternToolStripMenuItem.Name = "patternToolStripMenuItem";
-            this.patternToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.patternToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.patternToolStripMenuItem.Text = "Pattern";
             this.patternToolStripMenuItem.Click += new System.EventHandler(this.patternToolStripMenuItem_Click);
             // 
@@ -128,14 +130,14 @@
             // instructionManualToolStripMenuItem
             // 
             this.instructionManualToolStripMenuItem.Name = "instructionManualToolStripMenuItem";
-            this.instructionManualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.instructionManualToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.instructionManualToolStripMenuItem.Text = "Instruction manual";
             this.instructionManualToolStripMenuItem.Click += new System.EventHandler(this.instructionManualToolStripMenuItem_Click);
             // 
             // licensedToolStripMenuItem
             // 
             this.licensedToolStripMenuItem.Name = "licensedToolStripMenuItem";
-            this.licensedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licensedToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.licensedToolStripMenuItem.Text = "About";
             this.licensedToolStripMenuItem.Click += new System.EventHandler(this.licensedToolStripMenuItem_Click);
             // 
@@ -146,6 +148,12 @@
             this.pnlForm.Name = "pnlForm";
             this.pnlForm.Size = new System.Drawing.Size(1027, 510);
             this.pnlForm.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainFrm
             // 
@@ -180,5 +188,6 @@
         private System.Windows.Forms.ToolStripMenuItem instructionManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licensedToolStripMenuItem;
         private System.Windows.Forms.Panel pnlForm;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -52,6 +52,8 @@ namespace SmartCardTool.ChildFrm
             COMPort();
 
             LoadSettingfile();
+
+            Param.Pages = 1;
         }
 
         private void ComportFrm_FormClosing(object sender, FormClosingEventArgs e)

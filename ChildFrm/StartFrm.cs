@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Media;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -39,7 +40,6 @@ namespace SmartCardTool.ChildFrm
 
 
 
-
         public StartFrm()
         {
             InitializeComponent();
@@ -61,6 +61,10 @@ namespace SmartCardTool.ChildFrm
             OpenPort();
 
             Init();
+
+            groupBox1.Enabled = false;
+
+            Param.Pages = 9;
         }
 
         private void StartFrm_FormClosing(object sender, FormClosingEventArgs e)
@@ -193,7 +197,8 @@ namespace SmartCardTool.ChildFrm
 
         private async void AsyncInsertTable(string partnumber)
         {
-            TbScanner.Text = partnumber;
+            //TbScanner.Text = partnumber;
+            CmbScanner.Text = partnumber;
             using (var db = new DBContext())
             {
 
@@ -204,6 +209,14 @@ namespace SmartCardTool.ChildFrm
                     TbPartName1.Text =
                     TbPartName2.Text =
                     TbPartName3.Text = String.Empty;
+                    InvokeCtrl(LbStatus, "NOT Registration Part number !!!");
+
+                    using (var soundPlayer = new SoundPlayer(@"D:\Project\SmartCardTool\www\Alarm05.wav"))
+                    {
+                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                    }
+
+
                     return;
                 }
                 TbPartName1.Text = existData.Partname1;
@@ -262,6 +275,8 @@ namespace SmartCardTool.ChildFrm
                 }
                 else
                 {
+                    InvokeCtrl(LbStatus, "No compatible adapters found");
+
                     //WriteLog("No compatible adapters found");
                     return;
                 }
@@ -271,13 +286,24 @@ namespace SmartCardTool.ChildFrm
                 _adapter.Context = _context;
                 _smartcard = new SmartTag(_adapter);
 
+
                 //WriteLog(_adapterName + " detected");
                 //Label_Message.Text = STATUSREADY;
+
+
+
+                InvokeCtrl(LbStatus, STATUSREADY);
+
+
+                //ACRStatusMessage = STATUSREADY;
                 //Label_IDm.Text = "---";
             }
             catch (Exception ex)
             {
                 //WriteLog(ex.Message);
+                InvokeCtrl(LbStatus, ex.Message);
+
+
             }
 
 
@@ -289,6 +315,8 @@ namespace SmartCardTool.ChildFrm
             {
                 return false;
             }
+            InvokeCtrl(LbStatus, STATUSTOUCH);
+
             //Label_Message.Text = STATUSTOUCH;
             //Label_IDm.Text = "---";
             timer.Interval = 250;
@@ -336,6 +364,8 @@ namespace SmartCardTool.ChildFrm
                 }
                 catch (Exception ex)
                 {
+                    InvokeCtrl(LbStatus, ex.Message);
+
                     //WriteLog("Card open failed - " + ex.Message);
                     return;
                 }
@@ -350,14 +380,30 @@ namespace SmartCardTool.ChildFrm
                 //Label_IDm.Text = BitConverter.ToString(idm);
 
                 //Label_Message.Text = STATUSPROCESS;
+
+
+
+                InvokeCtrl(LbStatus, STATUSPROCESS);
+
+
                 this.Refresh();
 
                 _smartcard.SetIdm(idm);
 
                 _smartcard.StartProcess();
 
+                InvokeCtrl(LbStatus, STATUSCOMPLETED);
+
+
                 //Label_Message.Text = STATUSCOMPLETED;
                 _adapter.CloseCard();
+
+
+                using (var soundPlayer = new SoundPlayer(@"D:\Project\SmartCardTool\www\tada.wav"))
+                {
+                    soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                }
+
 
 
                 switch (_smartcard.SelectedFunction)
@@ -376,11 +422,93 @@ namespace SmartCardTool.ChildFrm
             {
                 //WriteLog(ex.Message);
 
-
+                InvokeCtrl(LbStatus, ex.Message);
             }
         }
 
 
 
+
+
+
+        private void InvokeCtrl(Control ctrl, string message)
+        {
+            if (ctrl.InvokeRequired)
+            {
+                ctrl.Invoke(new Action(() =>
+                {
+                    ctrl.Text = message;
+                }));
+            }
+            else
+            {
+                ctrl.Text = message;
+            }
+        }
+
+
+
+        private void CkbAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            AutomaticScanner();
+        }
+
+        private void AutomaticScanner()
+        {
+            if (CkbAuto.Checked == true)
+            {
+                serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+
+                CmbScanner.Items.Clear();
+                CmbScanner.Text =
+                   TbPartName1.Text =
+                   TbPartName2.Text =
+                   TbPartName3.Text = String.Empty;
+
+                groupBox1.Enabled = false;
+            }
+            else
+            {
+                serialPort.DataReceived -= new SerialDataReceivedEventHandler(DataReceivedHandler);
+                CmbScanner.Items.Clear();
+                CmbScanner.Text =
+                   TbPartName1.Text =
+                   TbPartName2.Text =
+                   TbPartName3.Text = String.Empty;
+
+                groupBox1.Enabled = true;
+
+                //var t = Task.Run( () => LoadDataInCmbBox());
+                LoadDataInCmbBox();
+
+            }
+
+        }
+
+        private async void LoadDataInCmbBox()
+        {
+            using (var db = new DBContext())
+            {
+                var lists = await db.Smartcards.ToListAsync();
+                if (lists.Count == 0) return;
+                foreach (var item in lists)
+                {
+                    CmbScanner.Items.Add(item.Partnumber);
+                }
+            }
+        }
+
+        private void BtnSubmit_Click(object sender, EventArgs e)
+        {
+            BtnSubmit.Enabled = false;
+            AsyncInsertTable(CmbScanner.Text);
+            BtnSubmit.Enabled = true;
+
+        }
+
+        private void CmbScanner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BtnSubmit.Focus();
+        }
     }
 }

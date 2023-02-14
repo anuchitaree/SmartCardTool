@@ -1,5 +1,7 @@
 ﻿using SmartCardTool.ChildFrm;
+using SmartCardTool.Modules;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace SmartCardTool
@@ -55,12 +57,16 @@ namespace SmartCardTool
 
         private void instructionManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            string path = @"--kiosk D:\WSStore\z353.pdf";
+            ProcessStartInfo startInfo = new ProcessStartInfo(path);
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            Process.Start("firefox.exe", path);
         }
 
         private void licensedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AboutFrm frm = new AboutFrm();
+            frm.ShowDialog();
         }
 
         //=========
@@ -99,6 +105,13 @@ namespace SmartCardTool
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Param.Pages == 0)
+            {
+                CloseOpenChildForm(new StartFrm());
 
+            }
+        }
     }
 }

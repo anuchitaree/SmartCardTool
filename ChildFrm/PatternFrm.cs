@@ -22,6 +22,8 @@ namespace SmartCardTool.ChildFrm
             {
                 Directory.CreateDirectory(path1);
             }
+
+            Param.Pages = 2;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)

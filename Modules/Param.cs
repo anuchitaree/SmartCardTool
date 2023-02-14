@@ -18,5 +18,7 @@ namespace SmartCardTool.Modules
         public static string Permition = "on";
 
         public static string ConnectionString = "";
+
+        public static int Pages = 0;
     }
 }

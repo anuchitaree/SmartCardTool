@@ -1,6 +1,7 @@
 ﻿using AioiSystems.DotModule;
 using AioiSystems.DotModule.Barcode;
 using SmartCardTool.Models;
+using SmartCardTool.Modules;
 using SmartCardTool.Modules.Initial;
 using System;
 using System.Data;
@@ -39,6 +40,8 @@ namespace SmartCardTool.ChildFrm
             int[] width = new int[] { 5, 30, 120, 120, 120, 120 };
 
             DataGridViewInit.Pattern_1(DgvList, header, width);
+
+            Param.Pages = 3;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -248,11 +251,11 @@ namespace SmartCardTool.ChildFrm
         {
             ImageInfo imageInfo = CreateImage(TbPartNumber.Text, TbPartName1.Text, TbPartName2.Text, TbPartName3.Text);
 
-            pictureBox1.Width = 300;
-            pictureBox1.Height = 200;
-            pictureBox1.Left = 117;
-            pictureBox1.Top = 74;
-            pictureBox1.Refresh();
+            //pictureBox1.Width = 300;
+            //pictureBox1.Height = 200;
+            //pictureBox1.Left = 117;
+            //pictureBox1.Top = 74;
+            //pictureBox1.Refresh();
 
             //label1.Text = "2.9 inch (300 x 200)";
             //txtCommand.Text = BitConverter.ToString(imageInfo.GetImage());
@@ -280,9 +283,21 @@ namespace SmartCardTool.ChildFrm
             display.PutBarcode(code39, 220, 65);
 
             //Show preview
-            pictureBox1.Image = display.Preview;
+            //pictureBox1.Image = display.Preview;
 
             return display.GetLocalDisplayImage();
+        }
+
+        private void DgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DgvList.CurrentRow.Index < 0) return;
+            int index = DgvList.CurrentRow.Index;
+            TbPartNumber.Text=DgvList.Rows[index].Cells[2].Value.ToString();
+            TbPartName1.Text = DgvList.Rows[index].Cells[3].Value.ToString();
+            TbPartName2.Text = DgvList.Rows[index].Cells[4].Value.ToString();
+            TbPartName3.Text = DgvList.Rows[index].Cells[5].Value.ToString();
+
+
         }
     }
 }

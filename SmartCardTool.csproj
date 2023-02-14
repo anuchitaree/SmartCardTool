@@ -173,11 +173,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildFrm\AboutFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFrm\AboutFrm.Designer.cs">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFrm\ComportFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChildFrm\ComportFrm.Designer.cs">
       <DependentUpon>ComportFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFrm\InstructionManualFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFrm\InstructionManualFrm.Designer.cs">
+      <DependentUpon>InstructionManualFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFrm\PatternFrm.cs">
       <SubType>Form</SubType>
@@ -227,8 +239,14 @@
     <EmbeddedResource Include="AuxFrm.resx">
       <DependentUpon>AuxFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChildFrm\AboutFrm.resx">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildFrm\ComportFrm.resx">
       <DependentUpon>ComportFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFrm\InstructionManualFrm.resx">
+      <DependentUpon>InstructionManualFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFrm\PatternFrm.resx">
       <DependentUpon>PatternFrm.cs</DependentUpon>
@@ -271,6 +289,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="di.txt" />
+    <Content Include="www\Alarm05.wav" />
+    <Content Include="www\tada.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
