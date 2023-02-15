@@ -30,14 +30,14 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.TbPartnumber = new System.Windows.Forms.TextBox();
+            this.Tblen = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnTest = new System.Windows.Forms.Button();
             this.BtnPaste = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.Tblen = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.TbPNqty = new System.Windows.Forms.TextBox();
             this.TbPNstart = new System.Windows.Forms.TextBox();
@@ -76,6 +76,27 @@
             this.TbPartnumber.Size = new System.Drawing.Size(195, 29);
             this.TbPartnumber.TabIndex = 9;
             // 
+            // Tblen
+            // 
+            this.Tblen.AutoSize = true;
+            this.Tblen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tblen.Location = new System.Drawing.Point(315, 163);
+            this.Tblen.Name = "Tblen";
+            this.Tblen.Size = new System.Drawing.Size(38, 16);
+            this.Tblen.TabIndex = 5;
+            this.Tblen.Text = "Total";
+            this.Tblen.DoubleClick += new System.EventHandler(this.Tblen_DoubleClick);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(27, 287);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 16);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Part number";
+            // 
             // BtnSave
             // 
             this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -83,7 +104,7 @@
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(100, 29);
             this.BtnSave.TabIndex = 8;
-            this.BtnSave.Text = "Save && Save";
+            this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -129,16 +150,6 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Start position";
             // 
-            // Tblen
-            // 
-            this.Tblen.AutoSize = true;
-            this.Tblen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tblen.Location = new System.Drawing.Point(315, 163);
-            this.Tblen.Name = "Tblen";
-            this.Tblen.Size = new System.Drawing.Size(38, 16);
-            this.Tblen.TabIndex = 5;
-            this.Tblen.Text = "Total";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -148,16 +159,6 @@
             this.label5.Size = new System.Drawing.Size(89, 16);
             this.label5.TabIndex = 5;
             this.label5.Text = "From scanner";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(27, 287);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Part number";
             // 
             // label1
             // 

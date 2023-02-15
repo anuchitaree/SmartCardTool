@@ -21,7 +21,6 @@ namespace SmartCardTool.Models
         }
     
 
-        public DbSet<Account> Accounts { get; set; } = null;
         public DbSet<Smartcard> Smartcards { get; set; } = null;
 
 

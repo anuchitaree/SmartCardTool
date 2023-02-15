@@ -26,7 +26,6 @@ namespace SmartCardTool.ChildFrm
         private int _context = 0;
         private string _adapterName = "";
         private IAdapter _adapter;
-        //private string _iDm = "";
         private SmartTag _smartcard = null;
         private DisplayPainter _display = new DisplayPainter(DisplayPainter.DisplaySizeType.Size300x200, true);
 
@@ -34,7 +33,7 @@ namespace SmartCardTool.ChildFrm
 
         private const string STATUSREADY = "Ready";
         private const string STATUSPROCESS = "Processing...";
-        private const string STATUSTOUCH = "Touch Smart Card";
+        private const string STATUSTOUCH = "A1: Touch Smart Card -> Place smart card on top smart card R/W";
         private const string STATUSCOMPLETED = "Completed";
 
 
@@ -80,6 +79,54 @@ namespace SmartCardTool.ChildFrm
                     serialPort.Dispose();
                 }
             }
+        }
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (ReadingText != null && ReadingText.Length == Param.Patterns.TotalLength)
+            {
+                ReadingText = ReadingText.Substring(Param.Patterns.Start, Param.Patterns.Length);
+                AsyncInsertTable(ReadingText);
+            }
+            ReadingText = null;
+        }
+
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (_smartcard.Adapter.Poll())
+            {
+                timer.Enabled = false;
+                try
+                {
+                    _smartcard.Adapter.OpenCard();
+                }
+                catch (Exception ex)
+                {
+                    InvokeCtrl(LbStatus, ex.Message);
+
+                    //WriteLog("Card open failed - " + ex.Message);
+                    return;
+                }
+                StartProcess();
+            }
+        }
+
+        private void CkbAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            AutomaticScanner();
+        }
+        private void CmbScanner_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void BtnWrite_Click(object sender, EventArgs e)
+        {
+            BtnWrite.Enabled = false;
+            WriteData();
+            BtnWrite.Enabled = true;
         }
 
 
@@ -197,7 +244,6 @@ namespace SmartCardTool.ChildFrm
 
         private async void AsyncInsertTable(string partnumber)
         {
-            //TbScanner.Text = partnumber;
             CmbScanner.Text = partnumber;
             using (var db = new DBContext())
             {
@@ -206,19 +252,17 @@ namespace SmartCardTool.ChildFrm
                     .FirstOrDefaultAsync();
                 if (existData == null)
                 {
+                    TbPartName0.Text =
                     TbPartName1.Text =
                     TbPartName2.Text =
                     TbPartName3.Text = String.Empty;
-                    InvokeCtrl(LbStatus, "NOT Registration Part number !!!");
+                    InvokeCtrl(LbStatus, "A2 :Not registration Part number !!!==> Non data in database, should Tool -> Registration");
 
-                    using (var soundPlayer = new SoundPlayer(@"D:\Project\SmartCardTool\www\Alarm05.wav"))
-                    {
-                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                    }
-
+                    Sound(Param.InCompleteSound);
 
                     return;
                 }
+                TbPartName0.Text = existData.Partname0;
                 TbPartName1.Text = existData.Partname1;
                 TbPartName2.Text = existData.Partname2;
                 TbPartName3.Text = existData.Partname3;
@@ -226,7 +270,7 @@ namespace SmartCardTool.ChildFrm
                 if (StartPolling())
                 {
                     _smartcard.SelectedFunction = SmartTag.SmartTagFunctions.ShowImage;
-                    _smartcard.SetImageData(CreateImage(partnumber, existData.Partname1,
+                    _smartcard.SetImageData(CreateImage(existData.Partname0, existData.Partname1,
                existData.Partname2, existData.Partname3));
 
 
@@ -238,19 +282,18 @@ namespace SmartCardTool.ChildFrm
             }
         }
 
-
+        private void WriteData()
+        {
+            if (StartPolling())
+            {
+                _smartcard.SelectedFunction = SmartTag.SmartTagFunctions.ShowImage;
+                _smartcard.SetImageData(CreateImage(TbPartName0.Text, TbPartName1.Text, TbPartName2.Text, TbPartName3.Text));
+            }
+            return;
+        }
 
         #endregion
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (ReadingText != null && ReadingText.Length == Param.Patterns.TotalLength)
-            {
-                ReadingText = ReadingText.Substring(Param.Patterns.Start, Param.Patterns.Length);
-                AsyncInsertTable(ReadingText);
-            }
-            ReadingText = null;
-        }
 
 
 
@@ -259,15 +302,23 @@ namespace SmartCardTool.ChildFrm
         {
             try
             {
-                //var iserror = false;
-
                 int ret = PCSCModules.GetContext(ref _context);
 
                 if (ret != PCSCModules.SCARD_S_SUCCESS)
                 {
                     return;
                 }
+
+                var _ada = PCSCModules.GetAdapters(_context);
+                if (_ada == null)
+                {
+                    InvokeCtrl(LbStatus, "A3 :No connection => Smart card R/W has not yet connected.");
+                    return;
+                }
+
                 _adapterName = PCSCModules.GetAdapters(_context)[0].ToUpper();
+
+
 
                 if (_adapterName.Contains(ACR1252))
                 {
@@ -275,9 +326,8 @@ namespace SmartCardTool.ChildFrm
                 }
                 else
                 {
-                    InvokeCtrl(LbStatus, "No compatible adapters found");
+                    InvokeCtrl(LbStatus, "A4 : No compatible adapters found");
 
-                    //WriteLog("No compatible adapters found");
                     return;
                 }
 
@@ -286,17 +336,8 @@ namespace SmartCardTool.ChildFrm
                 _adapter.Context = _context;
                 _smartcard = new SmartTag(_adapter);
 
-
-                //WriteLog(_adapterName + " detected");
-                //Label_Message.Text = STATUSREADY;
-
-
-
                 InvokeCtrl(LbStatus, STATUSREADY);
 
-
-                //ACRStatusMessage = STATUSREADY;
-                //Label_IDm.Text = "---";
             }
             catch (Exception ex)
             {
@@ -317,33 +358,35 @@ namespace SmartCardTool.ChildFrm
             }
             InvokeCtrl(LbStatus, STATUSTOUCH);
 
-            //Label_Message.Text = STATUSTOUCH;
-            //Label_IDm.Text = "---";
             timer.Interval = 250;
             timer.Enabled = true;
             return true;
         }
-        private ImageInfo CreateImage(string partnumber, string partname1, string partname2, string partname3)
+        private ImageInfo CreateImage(string partname0, string partname1, string partname2, string partname3)
         {
             DisplayPainter display = new DisplayPainter(DisplayPainter.DisplaySizeType.Size300x200, false);
 
-            string qrcode = $"{partnumber},{DateTime.Now:yyyy-MM-ddTHH:mm:ss}";
+            string datetime = $"{DateTime.Now:yyyy-MM-ddTHH:mm:ss}";
+
+            string qrcode = $"{partname0},{datetime}";
             var code39 = new QRCode();
             code39.BarcodeData = qrcode; ;
             code39.Height = 200;
             code39.RotateFlip = RotateFlipType.Rotate270FlipNone;
-            display.PutBarcode(code39, 0, 25);
+            display.PutBarcode(code39, 0, 27);
 
 
-            display.PutText(partnumber, new Font("Arial", 28, FontStyle.Bold), 8, 5, false);
-            display.PutLine(8, 45, 292, 45, 3, false);
+            display.PutText(partname0, new Font("Arial", 27, FontStyle.Bold), 8, 0, false);
+
             //display.PutLine(5, 48, 292, 48, 1, false);
+            //display.PutLine(8, 45, 292, 45, 3, false);
 
-            display.PutText(partname1, new Font("Arial", 17, FontStyle.Bold), 170, 70, false);
-            display.PutText(partname2, new Font("Arial", 17, FontStyle.Bold), 170, 110, false);
-            display.PutText(partname3, new Font("Arial", 17, FontStyle.Bold), 170, 150, false);
+            display.PutText(partname1, new Font("Arial", 17, FontStyle.Bold), 170, 60, false);
+            display.PutText(partname2, new Font("Arial", 17, FontStyle.Bold), 170, 100, false);
+            display.PutText(partname3, new Font("Arial", 17, FontStyle.Bold), 170, 140, false);
 
 
+            display.PutText(datetime.Replace("T", "  "), new Font("sans-serif", 8, FontStyle.Bold), 170, 180, false);
 
             //'Draws line
 
@@ -353,25 +396,6 @@ namespace SmartCardTool.ChildFrm
             return display.GetLocalDisplayImage();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (_smartcard.Adapter.Poll())
-            {
-                timer.Enabled = false;
-                try
-                {
-                    _smartcard.Adapter.OpenCard();
-                }
-                catch (Exception ex)
-                {
-                    InvokeCtrl(LbStatus, ex.Message);
-
-                    //WriteLog("Card open failed - " + ex.Message);
-                    return;
-                }
-                StartProcess();
-            }
-        }
         private void StartProcess()
         {
             try
@@ -395,14 +419,11 @@ namespace SmartCardTool.ChildFrm
                 InvokeCtrl(LbStatus, STATUSCOMPLETED);
 
 
-                //Label_Message.Text = STATUSCOMPLETED;
                 _adapter.CloseCard();
 
 
-                using (var soundPlayer = new SoundPlayer(@"D:\Project\SmartCardTool\www\tada.wav"))
-                {
-                    soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                }
+
+                Sound(Param.CompleteSound);
 
 
 
@@ -448,10 +469,7 @@ namespace SmartCardTool.ChildFrm
 
 
 
-        private void CkbAuto_CheckedChanged(object sender, EventArgs e)
-        {
-            AutomaticScanner();
-        }
+
 
         private void AutomaticScanner()
         {
@@ -510,5 +528,18 @@ namespace SmartCardTool.ChildFrm
         {
             BtnSubmit.Focus();
         }
+
+
+        private void Sound(string path)
+        {
+            if (!File.Exists(path)) return;
+
+            using (var soundPlayer = new SoundPlayer(path))
+            {
+                soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+            }
+        }
+
+
     }
 }

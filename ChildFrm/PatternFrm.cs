@@ -24,6 +24,8 @@ namespace SmartCardTool.ChildFrm
             }
 
             Param.Pages = 2;
+
+            Loadpattern();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -40,15 +42,42 @@ namespace SmartCardTool.ChildFrm
         private void BtnPaste_Click(object sender, EventArgs e)
         {
             TbScan.Text = Clipboard.GetText();
-            Tblen.Text = TbScan.Text.Length.ToString();
+            Tblen.Text = $"[ {TbScan.Text.Length} ]";
         }
 
+        private void TbScan_TabIndexChanged(object sender, EventArgs e)
+        {
+            int aa = TbScan.SelectionStart;
+        }
 
+        private void Tblen_DoubleClick(object sender, EventArgs e)
+        {
+            Tblen.Text = $"[ {TbScan.Text.Length} ]";
+        }
 
         //================//
 
         #region Sub Program
 
+        private void Loadpattern()
+        {
+            string env = Environment.CurrentDirectory;
+            string path = $"{env}\\Setting\\pattern.txt";
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("Please Setup pattern first, SETUP -> PATTERN ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string data = File.ReadAllText(path);
+
+            string[] parts = data.Split(',');
+            if (parts.Length > 3)
+            {
+                TbSetTotal.Text = int.Parse(parts[0]).ToString();
+                TbPNstart.Text = Convert.ToInt32(parts[1]).ToString();
+                TbPNqty.Text = Convert.ToInt32(parts[2]).ToString();
+            }
+        }
         private void Save()
         {
             try
@@ -120,9 +149,6 @@ namespace SmartCardTool.ChildFrm
 
         #endregion
 
-        private void TbScan_TabIndexChanged(object sender, EventArgs e)
-        {
-            int aa = TbScan.SelectionStart;
-        }
+
     }
 }

@@ -36,8 +36,8 @@ namespace SmartCardTool.ChildFrm
                 Directory.CreateDirectory(path2);
             }
 
-            string[] header = new string[] { "key", "No", "Part number", "Part name row 1", "Part name row 2", "Part name row 3" };
-            int[] width = new int[] { 5, 30, 120, 120, 120, 120 };
+            string[] header = new string[] { "key", "No", "Search number", "Head", "Right R1", "Right R2", "Right R3" };
+            int[] width = new int[] { 5, 30, 150, 100, 100, 100, 100 };
 
             DataGridViewInit.Pattern_1(DgvList, header, width);
 
@@ -64,6 +64,26 @@ namespace SmartCardTool.ChildFrm
             CopyTo();
         }
 
+        private void DgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DgvList.CurrentRow.Index < 0) return;
+            int index = DgvList.CurrentRow.Index;
+            TbSearchPartnumber.Text = DgvList.Rows[index].Cells[2].Value.ToString();
+            TbPartName0.Text = DgvList.Rows[index].Cells[3].Value.ToString();
+            TbPartName1.Text = DgvList.Rows[index].Cells[4].Value.ToString();
+            TbPartName2.Text = DgvList.Rows[index].Cells[5].Value.ToString();
+            TbPartName3.Text = DgvList.Rows[index].Cells[6].Value.ToString();
+
+        }
+
+        private void TbSearchPartnumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                BtnSearch.Focus();
+            }
+        }
+
 
         //=================//
         #region Sub Program
@@ -73,7 +93,7 @@ namespace SmartCardTool.ChildFrm
             try
             {
 
-                if (TbPartNumber.Text.Trim() == String.Empty)
+                if (TbSearchPartnumber.Text.Trim() == String.Empty)
                 {
                     return;
                 }
@@ -81,11 +101,12 @@ namespace SmartCardTool.ChildFrm
                 using (var db = new DBContext())
                 {
                     var existData = await db.Smartcards
-                        .Where(x => x.Partnumber == TbPartNumber.Text.Trim()).ToListAsync();
+                        .Where(x => x.Partnumber == TbSearchPartnumber.Text.Trim()).ToListAsync();
                     if (existData.Count > 0)
                     {
                         foreach (var item in existData)
                         {
+                            item.Partname0 = TbPartName0.Text;
                             item.Partname1 = TbPartName1.Text;
                             item.Partname2 = TbPartName2.Text;
                             item.Partname3 = TbPartName3.Text;
@@ -97,7 +118,8 @@ namespace SmartCardTool.ChildFrm
                     }
                     var record = new Smartcard()
                     {
-                        Partnumber = TbPartNumber.Text.Trim(),
+                        Partnumber = TbSearchPartnumber.Text.Trim(),
+                        Partname0 = TbPartName0.Text,
                         Partname1 = TbPartName1.Text,
                         Partname2 = TbPartName2.Text,
                         Partname3 = TbPartName3.Text,
@@ -106,7 +128,7 @@ namespace SmartCardTool.ChildFrm
                     db.Smartcards.Add(record);
                     db.SaveChanges();
                     MessageBox.Show("Save part completed", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    TbPartNumber.Text = TbPartName1.Text = String.Empty;
+                    TbSearchPartnumber.Text = TbPartName0.Text = TbPartName1.Text = TbPartName2.Text = TbPartName3.Text = String.Empty;
 
                 }
 
@@ -119,31 +141,7 @@ namespace SmartCardTool.ChildFrm
             }
         }
 
-        private void Browse()
-        {
-            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            //openFileDialog1.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
-
-            //openFileDialog1.RestoreDirectory = true;
-
-            //openFileDialog1.Title = "Browse Image File";
-
-            //openFileDialog1.DefaultExt = "jpg";
-
-            //openFileDialog1.ReadOnlyChecked = true;
-
-            //openFileDialog1.ShowReadOnly = true;
-
-
-            //openFileDialog1.Filter = "Image files (*.jpg;*.png)|*.jpg;*png|All files (*.*)|*.*";
-
-
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    TbDestination.Text = openFileDialog1.FileName;
-            //}
-        }
 
         private void ListUp()
         {
@@ -158,7 +156,7 @@ namespace SmartCardTool.ChildFrm
                     int i = 1;
                     foreach (var item in wsLists)
                     {
-                        DgvList.Rows.Add(item.Id, i++, item.Partnumber, item.Partname1, item.Partname2, item.Partname3);
+                        DgvList.Rows.Add(item.Id, i++, item.Partnumber, item.Partname0, item.Partname1, item.Partname2, item.Partname3);
                     }
 
 
@@ -249,7 +247,7 @@ namespace SmartCardTool.ChildFrm
 
         private void Preview()
         {
-            ImageInfo imageInfo = CreateImage(TbPartNumber.Text, TbPartName1.Text, TbPartName2.Text, TbPartName3.Text);
+            ImageInfo imageInfo = CreateImage(TbPartName0.Text, TbPartName1.Text, TbPartName2.Text, TbPartName3.Text);
 
             //pictureBox1.Width = 300;
             //pictureBox1.Height = 200;
@@ -288,16 +286,35 @@ namespace SmartCardTool.ChildFrm
             return display.GetLocalDisplayImage();
         }
 
-        private void DgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (DgvList.CurrentRow.Index < 0) return;
-            int index = DgvList.CurrentRow.Index;
-            TbPartNumber.Text=DgvList.Rows[index].Cells[2].Value.ToString();
-            TbPartName1.Text = DgvList.Rows[index].Cells[3].Value.ToString();
-            TbPartName2.Text = DgvList.Rows[index].Cells[4].Value.ToString();
-            TbPartName3.Text = DgvList.Rows[index].Cells[5].Value.ToString();
 
+
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            SearchDataInDB();
+        }
+
+
+
+        private async void SearchDataInDB()
+        {
+            using (var db = new DBContext())
+            {
+                var list = await db.Smartcards.Where(x => x.Partnumber == TbSearchPartnumber.Text.Trim())
+                    .FirstOrDefaultAsync();
+
+                if (list == null) return;
+
+                TbPartName0.Text = list.Partname0;
+                TbPartName1.Text = list.Partname1;
+                TbPartName2.Text = list.Partname2;
+                TbPartName3.Text = list.Partname3;
+
+            }
 
         }
+
+
+
     }
 }

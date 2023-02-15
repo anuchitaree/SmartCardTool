@@ -20,5 +20,10 @@ namespace SmartCardTool.Modules
         public static string ConnectionString = "";
 
         public static int Pages = 0;
+
+        public static string CompleteSound = @"D:\Project\SmartCardTool\www\tata.wav";
+
+        public static string InCompleteSound = @"D:\Project\SmartCardTool\www\Alarm05.wav";
+
     }
 }

@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.TbTrial = new System.Windows.Forms.TextBox();
             this.BtnReload = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
@@ -45,12 +46,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.TbTrial);
             this.panel1.Controls.Add(this.BtnReload);
@@ -68,8 +70,18 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(3, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(354, 345);
+            this.panel1.Size = new System.Drawing.Size(358, 367);
             this.panel1.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(5, 202);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 16);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Text....";
             // 
             // TbTrial
             // 
@@ -205,15 +217,14 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label7
+            // label8
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(5, 202);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 16);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Text....";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 344);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(244, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "You can test scanner after hit the \"Reload button\"";
             // 
             // ComportFrm
             // 
@@ -250,5 +261,6 @@
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
