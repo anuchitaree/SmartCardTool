@@ -65,7 +65,7 @@ namespace SmartCardTool.ChildFrm
             string path = $"{env}\\Setting\\pattern.txt";
             if (!File.Exists(path))
             {
-                MessageBox.Show("Please Setup pattern first, SETUP -> PATTERN ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Please Setup pattern first, SETUP -> PATTERN ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string data = File.ReadAllText(path);

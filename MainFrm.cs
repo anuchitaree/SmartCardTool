@@ -58,7 +58,7 @@ namespace SmartCardTool
 
         private void instructionManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = Environment.CurrentDirectory + "\\manual.pdf";
+            string path = Param.manual;
             if (!File.Exists(path)) return;
 
 

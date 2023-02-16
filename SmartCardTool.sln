@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCardTool", "SmartCardTool.csproj", "{19C75CF5-A643-40ED-B155-39E5F38BBF72}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SmartCardTools", "SmartCardTools\SmartCardTools.vdproj", "{50FD89E0-6214-4128-A427-11EE85D25007}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{19C75CF5-A643-40ED-B155-39E5F38BBF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19C75CF5-A643-40ED-B155-39E5F38BBF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19C75CF5-A643-40ED-B155-39E5F38BBF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FD89E0-6214-4128-A427-11EE85D25007}.Debug|Any CPU.ActiveCfg = Debug
+		{50FD89E0-6214-4128-A427-11EE85D25007}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

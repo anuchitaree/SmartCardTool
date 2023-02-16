@@ -54,7 +54,7 @@
             // 
             // BtnOk
             // 
-            this.BtnOk.Location = new System.Drawing.Point(181, 176);
+            this.BtnOk.Location = new System.Drawing.Point(173, 172);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(116, 38);
             this.BtnOk.TabIndex = 1;
@@ -88,6 +88,7 @@
             this.TbMac.Size = new System.Drawing.Size(254, 20);
             this.TbMac.TabIndex = 3;
             this.TbMac.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TbMac.Visible = false;
             // 
             // TbProKey
             // 
@@ -114,6 +115,7 @@
             this.label6.Size = new System.Drawing.Size(62, 13);
             this.label6.TabIndex = 2;
             this.label6.Text = "Machine ID";
+            this.label6.Visible = false;
             // 
             // label4
             // 
@@ -123,6 +125,7 @@
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Activated key";
+            this.label4.Visible = false;
             // 
             // textBox1
             // 
@@ -131,6 +134,7 @@
             this.textBox1.Size = new System.Drawing.Size(254, 20);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.Visible = false;
             // 
             // button1
             // 
@@ -140,6 +144,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Activate";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
             // AboutFrm
             // 

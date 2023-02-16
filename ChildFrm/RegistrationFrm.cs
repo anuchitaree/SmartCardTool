@@ -22,19 +22,19 @@ namespace SmartCardTool.ChildFrm
 
         private void RegistrationFrm_Load(object sender, EventArgs e)
         {
-            string path1 = $"{Environment.CurrentDirectory}\\Static";
+            //string path1 = $"{Environment.CurrentDirectory}\\Static";
 
-            if (!Directory.Exists(path1))
-            {
-                Directory.CreateDirectory(path1);
-            }
+            //if (!Directory.Exists(path1))
+            //{
+            //    Directory.CreateDirectory(path1);
+            //}
 
-            string path2 = $"{path1}\\Sourcefiles";
+            //string path2 = $"{path1}\\Sourcefiles";
 
-            if (!Directory.Exists(path2))
-            {
-                Directory.CreateDirectory(path2);
-            }
+            //if (!Directory.Exists(path2))
+            //{
+            //    Directory.CreateDirectory(path2);
+            //}
 
             string[] header = new string[] { "key", "No", "Search number", "Head", "Right R1", "Right R2", "Right R3" };
             int[] width = new int[] { 5, 30, 150, 100, 100, 100, 100 };

@@ -46,6 +46,8 @@ namespace SmartCardTool.ChildFrm
 
         private void StartFrm_Load(object sender, EventArgs e)
         {
+            Param.Pages = 9;
+
             string path0 = Environment.CurrentDirectory;
 
             string path1 = $"{path0}\\{Param.Setting}";
@@ -63,7 +65,6 @@ namespace SmartCardTool.ChildFrm
 
             groupBox1.Enabled = false;
 
-            Param.Pages = 9;
         }
 
         private void StartFrm_FormClosing(object sender, FormClosingEventArgs e)
@@ -140,7 +141,7 @@ namespace SmartCardTool.ChildFrm
             string path = $"{env}\\Setting\\pattern.txt";
             if (!File.Exists(path))
             {
-                MessageBox.Show("Please Setup pattern first, SETUP -> PATTERN ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Setup pattern first, Tool -> Pattern ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string data = File.ReadAllText(path);

@@ -21,9 +21,9 @@ namespace SmartCardTool.Modules
 
         public static int Pages = 0;
 
-        public static string CompleteSound = @"D:\Project\SmartCardTool\www\tata.wav";
+        public static string CompleteSound = Environment.CurrentDirectory +"\\Setting\\tata.wav";
 
-        public static string InCompleteSound = @"D:\Project\SmartCardTool\www\Alarm05.wav";
-
+        public static string InCompleteSound = Environment.CurrentDirectory +  "\\Setting\\Alarm05.wav";
+        public static string manual = Environment.CurrentDirectory + "\\Setting\\Smart card manual.pdf";
     }
 }
