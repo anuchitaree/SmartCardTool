@@ -36,8 +36,8 @@ namespace SmartCardTool.ChildFrm
             //    Directory.CreateDirectory(path2);
             //}
 
-            string[] header = new string[] { "key", "No", "Search number", "Head", "Right R1", "Right R2", "Right R3" };
-            int[] width = new int[] { 5, 30, 150, 100, 100, 100, 100 };
+            string[] header = new string[] { "key", "No", "Search number", "Header", "Right Row1", "Right Row2", "Right Row3" };
+            int[] width = new int[] { 5, 30, 150, 150, 150, 150, 150 };
 
             DataGridViewInit.Pattern_1(DgvList, header, width);
 
@@ -314,7 +314,9 @@ namespace SmartCardTool.ChildFrm
 
         }
 
-
-
+        private void TbSearchPartnumber_TextChanged(object sender, EventArgs e)
+        {
+            TbPartName0.Text = TbSearchPartnumber.Text;
+        }
     }
 }

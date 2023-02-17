@@ -1,7 +1,10 @@
-﻿using SmartCardTool.ChildFrm;
+﻿using Newtonsoft.Json;
+using SmartCardTool.ChildFrm;
+using SmartCardTool.Models;
 using SmartCardTool.Modules;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -14,25 +17,33 @@ namespace SmartCardTool
         public MainFrm()
         {
             InitializeComponent();
+            Load += Form1_Load;
+        }
+
+        void Form1_Load(object sender, EventArgs e)
+        {
+            Location = new Point(975, 0);
         }
 
         private void MainFrm_Load(object sender, EventArgs e)
         {
-            //var configBuilder = new ConfigurationBuilder().
-            // AddJsonFile("appsettings.json").Build();
-
-            //// get the section to read
-            //var configSection = configBuilder.GetSection("AppSettings");
-
-            //// get the configuration values in the section.
-            //var client_id = configSection["id"] ?? null;
 
             //Param.ConnectionString = configBuilder.GetSection("ConnectionStrings")["defaultConnection"]!;
+
+            string path = Environment.CurrentDirectory + "\\appsettings.json";
+
+            using (var reader = new StreamReader(path))
+            {
+                var appSettings = JsonConvert.DeserializeObject<AppSettings>(reader.ReadToEnd());
+
+                Param.DataPath = appSettings.Path.DataPath;
+                Param.UploadUrl =appSettings.Path.UploadUrl;
+            }
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CloseOpenChildForm(new StartFrm());
+            CloseOpenChildForm(new RunningFrm());
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,15 +56,10 @@ namespace SmartCardTool
             CloseOpenChildForm(new RegistrationFrm());
         }
 
-        private void comportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void licensedToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            CloseOpenChildForm(new ComportFrm());
-        }
+            CloseOpenChildForm(new AboutFrm());
 
-
-        private void patternToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CloseOpenChildForm(new PatternFrm());
         }
 
         private void instructionManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,9 +120,11 @@ namespace SmartCardTool
         {
             if (Param.Pages == 0)
             {
-                CloseOpenChildForm(new StartFrm());
+                CloseOpenChildForm(new RunningFrm());
 
             }
         }
+
+
     }
 }
