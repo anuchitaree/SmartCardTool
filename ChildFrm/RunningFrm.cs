@@ -6,11 +6,11 @@ using SmartCardTool.Models;
 using SmartCardTool.Modules;
 using SmartCartTool_API.Models;
 using System;
-using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -52,7 +52,7 @@ namespace SmartCardTool.ChildFrm
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            AsyncInsertTable();
+            Processing();
         }
 
         private void BtnReloadApp_Click(object sender, EventArgs e)
@@ -73,7 +73,13 @@ namespace SmartCardTool.ChildFrm
                 {
                     InvokeCtrl(LbStatus, ex.Message);
 
-                    InvokeLampRed(LbError, true);
+                    //LbStatus.Text = 
+                    //InvokeLampRed(LbError, true);
+
+                    LbError.BackColor = Color.Red;
+
+                    LbReady.BackColor = Color.White;
+
                     //WriteLog("Card open failed - " + ex.Message);
                     return;
                 }
@@ -83,7 +89,7 @@ namespace SmartCardTool.ChildFrm
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            AsyncInsertTable();
+            Processing();
         }
 
         private void FormLoading()
@@ -106,8 +112,8 @@ namespace SmartCardTool.ChildFrm
             LampNO();
 
 
-            timer1.Interval = 100;
-            timer1.Enabled = true;
+            //timer1.Interval = 100;
+            //timer1.Enabled = true;
 
         }
 
@@ -154,171 +160,313 @@ namespace SmartCardTool.ChildFrm
                 LbError.ForeColor = Color.FromArgb(60, 60, 60);
             }
         }
+
+        private void InvokeInit(Action a)
+        {
+            this.BeginInvoke(new MethodInvoker(a));
+        }
+
         private void Init()
         {
-            try
+            InvokeInit(() =>
             {
-                int ret = PCSCModules.GetContext(ref _context);
 
-                if (ret != PCSCModules.SCARD_S_SUCCESS)
+                try
                 {
-                    return;
+                    int ret = PCSCModules.GetContext(ref _context);
+
+                    if (ret != PCSCModules.SCARD_S_SUCCESS)
+                    {
+                        return;
+                    }
+
+                    var _ada = PCSCModules.GetAdapters(_context);
+                    if (_ada == null)
+                    {
+                        //InvokeCtrl(LbStatus, "A3 :No connection => Smart card reader has not yet connected. After connect, hit Reload App");
+
+                        LbStatus.Text = "A3 :No connection => Smart card reader has not yet connected. After connect, hit Reload App";
+
+                        LbError.BackColor = Color.FromArgb(255, 85, 85);
+
+                        //InvokeLampRed(LbError, true);
+
+                        return;
+                    }
+
+                    _adapterName = PCSCModules.GetAdapters(_context)[0].ToUpper();
+
+
+
+                    if (_adapterName.Contains(ACR1252))
+                    {
+                        _adapter = new ACR1252_Adapter();
+                    }
+                    else
+                    {
+                        InvokeCtrl(LbStatus, "A4 : No compatible adapters found");
+
+
+                        LbStatus.Text = "A4 : No compatible adapters found";
+
+                        LbError.BackColor = Color.FromArgb(255, 85, 85);
+
+                        //InvokeLampRed(LbError, true);
+
+                        return;
+                    }
+
+                    _adapter.OpenAdapter();
+                    _adapter.Name = _adapterName;
+                    _adapter.Context = _context;
+                    _smartcard = new SmartTag(_adapter);
+
+                    //InvokeCtrl(LbStatus, STATUSREADY);
+
+                    LbStatus.Text = STATUSREADY;
+
+                    LbReady.BackColor = Color.FromArgb(85, 255, 85);
+
+
+
+                    InvokeLampGreen(LbReady, true);
+
+                    //Thread.Sleep(5000);
+
+                    timer1.Interval = 100;
+
+                    timer1.Enabled = true;
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    LbStatus.Text = ex.Message;
+
+                    //InvokeCtrl(LbStatus, ex.Message);
+
+                    LbReady.BackColor = Color.White;
+
+                    //InvokeLampRed(LbError, true);
+
+                    LbError.BackColor = Color.FromArgb(255, 85, 85);
+
                 }
 
-                var _ada = PCSCModules.GetAdapters(_context);
-                if (_ada == null)
-                {
-                    InvokeCtrl(LbStatus, "A3 :No connection => Smart card reader has not yet connected. After connect, hit Reload App");
+            });
+        }
 
-                    InvokeLampRed(LbError, true);
-
-                    return;
-                }
-
-                _adapterName = PCSCModules.GetAdapters(_context)[0].ToUpper();
-
-
-
-                if (_adapterName.Contains(ACR1252))
-                {
-                    _adapter = new ACR1252_Adapter();
-                }
-                else
-                {
-                    InvokeCtrl(LbStatus, "A4 : No compatible adapters found");
-
-                    InvokeLampRed(LbError, true);
-
-                    return;
-                }
-
-                _adapter.OpenAdapter();
-                _adapter.Name = _adapterName;
-                _adapter.Context = _context;
-                _smartcard = new SmartTag(_adapter);
-
-                InvokeCtrl(LbStatus, STATUSREADY);
-
-                InvokeLampGreen(LbReady, true);
-
-
-            }
-            catch (Exception ex)
-            {
-                InvokeCtrl(LbStatus, ex.Message);
-
-                InvokeLampRed(LbError, true);
-
-            }
-
-
+        private void InvokeProcessing(Action a)
+        {
+            this.BeginInvoke(new MethodInvoker(a));
         }
 
 
-        private async void AsyncInsertTable()
+        private void Processing()
         {
-            //@"C:\Users\Administrator\source\repos\SmartCartTool_API\bin\Release\net6.0\publish\partnumber.txt"
+            InvokeProcessing(() =>
+            {
+
+                try
+                {
+
+
+                    //@"C:\Users\Administrator\source\repos\SmartCartTool_API\bin\Release\net6.0\publish\partnumber.txt"
+                    string path = Param.DataPath;
+
+                    if (!File.Exists(path))
+                    {
+                        return;
+                    }
+                    string data = File.ReadAllText(path);
+
+                    string[] parts = data.Split(',');
+
+                    if (parts.Length != 3) return;
+
+                    LbReceived.BackColor = Color.GreenYellow;
+
+                    timer1.Enabled = false;
+
+                    string partnumber = parts[0];
+
+                    CmbScanner.Text = partnumber;
+
+                    using (var db = new DBContext())
+                    {
+                        var existData = db.Smartcards.Where(x => x.Partnumber == partnumber)
+                            .FirstOrDefault();
+
+                        if (existData == null)
+                        {
+                            TbPartName0.Text =
+                            TbPartName1.Text =
+                            TbPartName2.Text =
+                            TbPartName3.Text = String.Empty;
+
+                            //InvokeCtrl(LbStatus, "A2 :Not registration => Non data in database, Tool -> Registration");
+
+                            LbStatus.Text = "A2 :Not registration => Non data in database, Tool -> Registration";
+
+                            LbNG.BackColor = Color.Red;
+                            LbError.BackColor = Color.Red;
+
+                            //LampOKNG(false);
+
+                            //InvokeLampRed(LbError, true);
+
+                            Sound(Param.InCompleteSound);
+
+                            return;
+                        }
+                        LbFindDB.BackColor = Color.GreenYellow;
+
+                        TbPartName0.Text = existData.Partname0;
+                        TbPartName1.Text = existData.Partname1;
+                        TbPartName2.Text = existData.Partname2;
+                        TbPartName3.Text = existData.Partname3;
+
+
+
+                        if (_smartcard == null)
+                        {
+                            return;
+                        }
+
+                        //InvokeCtrl(LbStatus, STATUSTOUCH);
+
+                        LbStatus.Text = STATUSTOUCH;
+                        string[] err = LbStatus.Text.Split(':');
+                        if (err[0] == "A1")
+                        {
+                            LbReady.BackColor = Color.White;
+                            LbError.BackColor = Color.Red;
+                        }
+
+                        timer.Interval = 250;
+                        timer.Enabled = true;
+
+                        _smartcard.SelectedFunction = SmartTag.SmartTagFunctions.ShowImage;
+                        _smartcard.SetImageData(CreateImage(existData.Partname0,
+                            existData.Partname1,
+                            existData.Partname2,
+                            existData.Partname3));
+
+                        //LbOK.BackColor = Color.GreenYellow; 
+
+                        //CallHttpClient(parts[0], parts[1], parts[2]);
+
+                        //var aa = ExecuteWithRetry(parts[0], parts[1], parts[2]);
+
+                    }
+                }
+                catch
+                {
+
+                    LbNG.BackColor = Color.Red;
+                }
+            });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExecuteWithRetry();
+        }
+
+        public HttpResponseMessage ExecuteWithRetry()
+        {
+            HttpResponseMessage result = null;
+
             string path = Param.DataPath;
 
             if (!File.Exists(path))
             {
-                return;
+                return new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("") };
             }
             string data = File.ReadAllText(path);
 
             string[] parts = data.Split(',');
 
-            if (parts.Length != 3) return;
-
-            timer1.Enabled = false;
-
-            string partnumber = parts[0];
-
-            CmbScanner.Text = partnumber;
-
-            using (var db = new DBContext())
+            var newjson = new PartNumber()
             {
-                var existData = await db.Smartcards.Where(x => x.Partnumber == partnumber)
-                    .FirstOrDefaultAsync();
+                PartNoSubAssy = parts[0],
+                LotId = parts[1],
+                TimeStamp = parts[2],
+            };
+            string json = JsonConvert.SerializeObject(newjson, Formatting.Indented);
 
-                if (existData == null)
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+            string url = Param.UploadUrl;
+            bool success = false;
+            using (var client = new HttpClient())
+            {
+                do
                 {
-                    TbPartName0.Text =
-                    TbPartName1.Text =
-                    TbPartName2.Text =
-                    TbPartName3.Text = String.Empty;
-
-                    InvokeCtrl(LbStatus, "A2 :Not registration => Non data in database, Tool -> Registration");
-
-                    LampOKNG(false);
-
-                    InvokeLampRed(LbError, true);
-
-                    Sound(Param.InCompleteSound);
-
-                    return;
+                    result = client.PostAsync(url, httpContent).Result;
+                    success = result.IsSuccessStatusCode;
                 }
-
-                TbPartName0.Text = existData.Partname0;
-                TbPartName1.Text = existData.Partname1;
-                TbPartName2.Text = existData.Partname2;
-                TbPartName3.Text = existData.Partname3;
-
-                if (StartPolling())
-                {
-                    _smartcard.SelectedFunction = SmartTag.SmartTagFunctions.ShowImage;
-                    _smartcard.SetImageData(CreateImage(existData.Partname0, existData.Partname1,
-               existData.Partname2, existData.Partname3));
-
-
-                    var client = new HttpClient();
-
-
-                    var newjson = new PartNumber()
-                    {
-                        PartNoSubAssy = parts[0],
-                        LotId = parts[1],
-                        TimeStamp = parts[2],
-                    };
-                    string json = JsonConvert.SerializeObject(newjson, Formatting.Indented);
-
-                    StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                    bool result = false;
-                    while (result)
-                    {
-
-                        var response = await client.PostAsync(Param.UploadUrl, httpContent);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                            {
-
-                                File.Delete(Param.DataPath);
-
-                                await Task.Delay(100);
-                                timer1.Enabled = true;
-                                result = true; // exit while loop
-                            }
-                        }
-                        else
-                        {
-                            await Task.Delay(3000);
-                        }
-
-                    }
-
-
-                }
-
-                return;
+                while (!success);
             }
+
+            return result;
         }
 
 
+
+        private async void CallHttpClient(string parts0, string parts1, string parts2)
+        {
+            var client = new HttpClient();
+
+
+            var newjson = new PartNumber()
+            {
+                PartNoSubAssy = parts0,
+                LotId = parts1,
+                TimeStamp = parts2,
+            };
+            string json = JsonConvert.SerializeObject(newjson, Formatting.Indented);
+
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+            bool result = false;
+            while (!result)
+            {
+
+                var response = await client.PostAsync(Param.UploadUrl, httpContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        if (File.Exists(Param.DataPath))
+                        {
+                            File.Delete(Param.DataPath);
+                        }
+
+                        await Task.Delay(100);
+                        timer1.Enabled = true;
+                        result = true; // exit while loop
+                    }
+                }
+                else
+                {
+                    await Task.Delay(3000);
+                }
+
+            }
+
+        }
+
+        //private void InvokeStartPolling(Action a)
+        //{
+        //    this.BeginInvoke(new MethodInvoker(a));
+        //}
+
         private bool StartPolling()
         {
+
             if (_smartcard == null)
             {
                 return false;
@@ -328,7 +476,9 @@ namespace SmartCardTool.ChildFrm
             timer.Interval = 250;
             timer.Enabled = true;
             return true;
+
         }
+
         private ImageInfo CreateImage(string partname0, string partname1, string partname2, string partname3)
         {
             DisplayPainter display = new DisplayPainter(DisplayPainter.DisplaySizeType.Size300x200, false);
@@ -363,55 +513,74 @@ namespace SmartCardTool.ChildFrm
             return display.GetLocalDisplayImage();
         }
 
+        private void InvokeStartProcess(Action a)
+        {
+            this.BeginInvoke(new MethodInvoker(a));
+        }
+
         private void StartProcess()
         {
-            try
+            InvokeStartProcess(() =>
             {
-                byte[] idm = _adapter.GetIdm();
-                //Label_IDm.Text = BitConverter.ToString(idm);
-
-                //Label_Message.Text = STATUSPROCESS;
-
-
-
-                InvokeCtrl(LbStatus, STATUSPROCESS);
-
-
-                this.Refresh();
-
-                _smartcard.SetIdm(idm);
-
-                _smartcard.StartProcess();
-
-                InvokeCtrl(LbStatus, STATUSCOMPLETED);
-
-
-                _adapter.CloseCard();
-
-
-
-                Sound(Param.CompleteSound);
-
-
-
-                switch (_smartcard.SelectedFunction)
+                try
                 {
-                    case SmartTag.SmartTagFunctions.ReadUserData:
+                    byte[] idm = _adapter.GetIdm();
+                    //Label_IDm.Text = BitConverter.ToString(idm);
 
-                    case SmartTag.SmartTagFunctions.ReadFromCardArea:
-                        //ShowReadData(_smartcard.GetUserData());
-                        break;
+                    //Label_Message.Text = STATUSPROCESS;
 
-                    default:
-                        break;
+
+
+                    //InvokeCtrl(LbStatus, STATUSPROCESS);
+                    LbStatus.Text = STATUSPROCESS;
+                    LbWriteTag.BackColor = Color.GreenYellow;
+                    LbReady.BackColor = Color.GreenYellow;
+                    LbError.BackColor = Color.White;
+
+                    this.Refresh();
+
+                    _smartcard.SetIdm(idm);
+
+                    _smartcard.StartProcess();
+
+                    //InvokeCtrl(LbStatus, STATUSCOMPLETED);
+
+                    LbStatus.Text = STATUSCOMPLETED;
+                    LbOK.BackColor = Color.GreenYellow;
+                    LbNG.BackColor = Color.DarkRed;
+
+                    _adapter.CloseCard();
+
+                    var sendConfirn = ExecuteWithRetry();
+
+                    Sound(Param.CompleteSound);
+
+
+
+                    switch (_smartcard.SelectedFunction)
+                    {
+                        case SmartTag.SmartTagFunctions.ReadUserData:
+
+                        case SmartTag.SmartTagFunctions.ReadFromCardArea:
+                            //ShowReadData(_smartcard.GetUserData());
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                //WriteLog(ex.Message);
+                catch (Exception ex)
+                {
+                    //WriteLog(ex.Message);
 
-                InvokeCtrl(LbStatus, ex.Message);
-            }
+                    InvokeCtrl(LbStatus, ex.Message);
+                    LbStatus.Text = ex.Message;
+                    LbError.BackColor = Color.Red;
+                    LbReady.BackColor = Color.White;
+                    LbNG.BackColor = Color.Red;
+                    LbOK.BackColor = Color.Black;
+                }
+            });
         }
 
         private void Sound(string path)
@@ -533,6 +702,6 @@ namespace SmartCardTool.ChildFrm
             }
         }
 
-        
+
     }
 }

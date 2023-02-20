@@ -56,9 +56,10 @@
             this.LbNG = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnStart = new System.Windows.Forms.Button();
+            this.BtnReloadApp = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.BtnReloadApp = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,6 +88,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.LbError);
             this.panel1.Controls.Add(this.LbCompleted);
             this.panel1.Controls.Add(this.LbSendToStock);
@@ -387,14 +389,6 @@
             this.BtnStart.UseVisualStyleBackColor = true;
             this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
-            // timer
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // BtnReloadApp
             // 
             this.BtnReloadApp.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -406,6 +400,24 @@
             this.BtnReloadApp.Text = "Reload App";
             this.BtnReloadApp.UseVisualStyleBackColor = true;
             this.BtnReloadApp.Click += new System.EventHandler(this.BtnReloadApp_Click);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(657, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RunningFrm
             // 
@@ -459,5 +471,6 @@
         private System.Windows.Forms.Label LbReady;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BtnReloadApp;
+        private System.Windows.Forms.Button button1;
     }
 }

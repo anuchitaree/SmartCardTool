@@ -30,14 +30,20 @@ namespace SmartCardTool
 
             //Param.ConnectionString = configBuilder.GetSection("ConnectionStrings")["defaultConnection"]!;
 
-            string path = Environment.CurrentDirectory + "\\appsettings.json";
+            string path1 = @"c:\SmartCardTool\appsettings.json"; /*Environment.CurrentDirectory + "\\appsettings.json";*/
 
-            using (var reader = new StreamReader(path))
+
+            using (var reader = new StreamReader(path1))
             {
-                var appSettings = JsonConvert.DeserializeObject<AppSettings>(reader.ReadToEnd());
+
+                string readline  =reader.ReadToEnd();
+
+                //var appSettings = JsonConvert.DeserializeObject<AppSettings>(reader.ReadToEnd());
+
+                var appSettings = JsonConvert.DeserializeObject<AppSettings>(readline);
 
                 Param.DataPath = appSettings.Path.DataPath;
-                Param.UploadUrl =appSettings.Path.UploadUrl;
+                Param.UploadUrl = appSettings.Path.UploadUrl;
             }
         }
 
