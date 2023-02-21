@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.LbError = new System.Windows.Forms.Label();
             this.LbCompleted = new System.Windows.Forms.Label();
             this.LbSendToStock = new System.Windows.Forms.Label();
@@ -59,7 +60,7 @@
             this.BtnReloadApp = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -113,6 +114,16 @@
             this.panel1.Size = new System.Drawing.Size(878, 94);
             this.panel1.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(657, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LbError
             // 
             this.LbError.BackColor = System.Drawing.Color.White;
@@ -143,7 +154,7 @@
             this.LbSendToStock.Name = "LbSendToStock";
             this.LbSendToStock.Size = new System.Drawing.Size(91, 32);
             this.LbSendToStock.TabIndex = 15;
-            this.LbSendToStock.Text = "Send to St mon.";
+            this.LbSendToStock.Text = "Sent to Stock";
             this.LbSendToStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LbWriteTag
@@ -154,7 +165,7 @@
             this.LbWriteTag.Name = "LbWriteTag";
             this.LbWriteTag.Size = new System.Drawing.Size(91, 32);
             this.LbWriteTag.TabIndex = 15;
-            this.LbWriteTag.Text = "Write TAG";
+            this.LbWriteTag.Text = "Wrote TAG";
             this.LbWriteTag.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LbFindDB
@@ -165,7 +176,7 @@
             this.LbFindDB.Name = "LbFindDB";
             this.LbFindDB.Size = new System.Drawing.Size(91, 32);
             this.LbFindDB.TabIndex = 15;
-            this.LbFindDB.Text = "Find DB";
+            this.LbFindDB.Text = "Found Data";
             this.LbFindDB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LbReceived
@@ -409,15 +420,10 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
+            // timer2
             // 
-            this.button1.Location = new System.Drawing.Point(657, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.timer2.Interval = 10000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // RunningFrm
             // 
@@ -472,5 +478,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BtnReloadApp;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

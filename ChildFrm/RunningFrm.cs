@@ -12,6 +12,8 @@ using System.Linq;
 using System.Media;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,6 +35,13 @@ namespace SmartCardTool.ChildFrm
         private const string STATUSPROCESS = "Processing...";
         private const string STATUSTOUCH = "A1: Touch Smart Card -> Place smart card on top smart card R/W";
         private const string STATUSCOMPLETED = "Completed";
+
+        private string[] _images = new string[4];
+        private string[] _request = new string[3];
+
+
+        private HttpClient client;
+
         public RunningFrm()
         {
             InitializeComponent();
@@ -41,22 +50,36 @@ namespace SmartCardTool.ChildFrm
         private void RunningFrm_Load(object sender, EventArgs e)
         {
 
+
             FormLoading();
 
+            client = new HttpClient();
+            client.BaseAddress = new Uri($"http://localhost:5217");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         private void RunningFrm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_smartcard != null && _smartcard.Adapter != null)
+            {
+                _smartcard.Adapter.CloseAdapter();
+            }
 
+            client.Dispose();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Processing();
+            ScanPartnumberDotTxt();
         }
 
         private void BtnReloadApp_Click(object sender, EventArgs e)
         {
+            if (_smartcard != null && _smartcard.Adapter != null)
+            {
+                _smartcard.Adapter.CloseAdapter();
+            }
             FormLoading();
         }
 
@@ -69,29 +92,32 @@ namespace SmartCardTool.ChildFrm
                 {
                     _smartcard.Adapter.OpenCard();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    InvokeCtrl(LbStatus, ex.Message);
-
-                    //LbStatus.Text = 
-                    //InvokeLampRed(LbError, true);
-
                     LbError.BackColor = Color.Red;
 
                     LbReady.BackColor = Color.White;
 
-                    //WriteLog("Card open failed - " + ex.Message);
                     return;
                 }
                 StartProcess();
+            }
+            else
+            {
+                LbError.BackColor = Color.Red;
+
+                LbReady.BackColor = Color.White;
+
+                LbStatus.Text = STATUSTOUCH;
             }
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            Processing();
+            ScanPartnumberDotTxt();
         }
 
+        //================== Sub Program ===============//
         private void FormLoading()
         {
             Param.Pages = 9;
@@ -105,68 +131,31 @@ namespace SmartCardTool.ChildFrm
                 Directory.CreateDirectory(path1);
             }
 
-            LbStatus.Text = "";
-
-            Init();
-
-            LampNO();
-
-
-            //timer1.Interval = 100;
-            //timer1.Enabled = true;
+            InitSmartCardReader();
+            ResetLamp();
 
         }
 
-        private void LampNO()
+
+        private void ResetLamp()
         {
             LbOK.BackColor = Color.FromArgb(0, 28, 0);
             LbOK.ForeColor = Color.FromArgb(60, 60, 60);
             LbNG.BackColor = Color.FromArgb(42, 0, 0);
             LbNG.ForeColor = Color.FromArgb(60, 60, 60);
-
             LbReady.BackColor = LbReceived.BackColor = LbFindDB.BackColor = LbWriteTag.BackColor
-                = LbSendToStock.BackColor = LbCompleted.BackColor = LbError.BackColor = Color.White;
-
+               = LbSendToStock.BackColor = LbCompleted.BackColor = LbError.BackColor = Color.White;
+            TbPartName0.Text = TbPartName1.Text = TbPartName2.Text = TbPartName3.Text = LbStatus.Text = "";
         }
 
-        private void LampOKNG(bool status)
-        {
-            if (status)
-            {
-                LbNG.BackColor = Color.FromArgb(42, 0, 0);
-                LbNG.ForeColor = Color.FromArgb(60, 60, 60);
-                LbOK.BackColor = Color.FromArgb(85, 255, 85);
-                LbOK.ForeColor = Color.FromArgb(0, 0, 0);
-            }
-            else
-            {
-                LbOK.BackColor = Color.FromArgb(0, 28, 0);
-                LbOK.ForeColor = Color.FromArgb(60, 60, 60);
-                LbNG.BackColor = Color.FromArgb(255, 85, 85);
-                LbNG.ForeColor = Color.FromArgb(0, 0, 0);
-            }
-        }
 
-        private void LampError(bool status)
-        {
-            if (status)
-            {
-                LbError.BackColor = Color.FromArgb(255, 85, 85);
-                LbError.ForeColor = Color.FromArgb(0, 0, 0);
-            }
-            else
-            {
-                LbError.BackColor = Color.FromArgb(60, 60, 60);
-                LbError.ForeColor = Color.FromArgb(60, 60, 60);
-            }
-        }
 
         private void InvokeInit(Action a)
         {
             this.BeginInvoke(new MethodInvoker(a));
         }
 
-        private void Init()
+        private void InitSmartCardReader()
         {
             InvokeInit(() =>
             {
@@ -183,13 +172,11 @@ namespace SmartCardTool.ChildFrm
                     var _ada = PCSCModules.GetAdapters(_context);
                     if (_ada == null)
                     {
-                        //InvokeCtrl(LbStatus, "A3 :No connection => Smart card reader has not yet connected. After connect, hit Reload App");
 
                         LbStatus.Text = "A3 :No connection => Smart card reader has not yet connected. After connect, hit Reload App";
 
                         LbError.BackColor = Color.FromArgb(255, 85, 85);
 
-                        //InvokeLampRed(LbError, true);
 
                         return;
                     }
@@ -204,14 +191,12 @@ namespace SmartCardTool.ChildFrm
                     }
                     else
                     {
-                        InvokeCtrl(LbStatus, "A4 : No compatible adapters found");
 
 
                         LbStatus.Text = "A4 : No compatible adapters found";
 
                         LbError.BackColor = Color.FromArgb(255, 85, 85);
 
-                        //InvokeLampRed(LbError, true);
 
                         return;
                     }
@@ -221,17 +206,13 @@ namespace SmartCardTool.ChildFrm
                     _adapter.Context = _context;
                     _smartcard = new SmartTag(_adapter);
 
-                    //InvokeCtrl(LbStatus, STATUSREADY);
 
                     LbStatus.Text = STATUSREADY;
 
                     LbReady.BackColor = Color.FromArgb(85, 255, 85);
 
 
-
-                    InvokeLampGreen(LbReady, true);
-
-                    //Thread.Sleep(5000);
+                    Thread.Sleep(1000);
 
                     timer1.Interval = 100;
 
@@ -244,11 +225,7 @@ namespace SmartCardTool.ChildFrm
                 {
                     LbStatus.Text = ex.Message;
 
-                    //InvokeCtrl(LbStatus, ex.Message);
-
                     LbReady.BackColor = Color.White;
-
-                    //InvokeLampRed(LbError, true);
 
                     LbError.BackColor = Color.FromArgb(255, 85, 85);
 
@@ -257,22 +234,19 @@ namespace SmartCardTool.ChildFrm
             });
         }
 
-        private void InvokeProcessing(Action a)
+        private void InvokeScanPartnumberDotTxt(Action a)
         {
             this.BeginInvoke(new MethodInvoker(a));
         }
 
 
-        private void Processing()
+        private void ScanPartnumberDotTxt()
         {
-            InvokeProcessing(() =>
+            InvokeScanPartnumberDotTxt(() =>
             {
 
                 try
                 {
-
-
-                    //@"C:\Users\Administrator\source\repos\SmartCartTool_API\bin\Release\net6.0\publish\partnumber.txt"
                     string path = Param.DataPath;
 
                     if (!File.Exists(path))
@@ -285,7 +259,13 @@ namespace SmartCardTool.ChildFrm
 
                     if (parts.Length != 3) return;
 
-                    LbReceived.BackColor = Color.GreenYellow;
+                    ResetLamp();
+
+
+                    LbReceived.BackColor = Color.FromArgb(255, 255, 0);
+                    _request[0] = parts[0];
+                    _request[1] = parts[1];
+                    _request[2] = parts[2];
 
                     timer1.Enabled = false;
 
@@ -305,27 +285,23 @@ namespace SmartCardTool.ChildFrm
                             TbPartName2.Text =
                             TbPartName3.Text = String.Empty;
 
-                            //InvokeCtrl(LbStatus, "A2 :Not registration => Non data in database, Tool -> Registration");
 
                             LbStatus.Text = "A2 :Not registration => Non data in database, Tool -> Registration";
 
                             LbNG.BackColor = Color.Red;
                             LbError.BackColor = Color.Red;
 
-                            //LampOKNG(false);
-
-                            //InvokeLampRed(LbError, true);
-
                             Sound(Param.InCompleteSound);
 
                             return;
                         }
-                        LbFindDB.BackColor = Color.GreenYellow;
+                        LbFindDB.BackColor = Color.FromArgb(255, 255, 0);
 
-                        TbPartName0.Text = existData.Partname0;
-                        TbPartName1.Text = existData.Partname1;
-                        TbPartName2.Text = existData.Partname2;
-                        TbPartName3.Text = existData.Partname3;
+                        _images[0] = TbPartName0.Text = existData.Partname0;
+                        _images[1] = TbPartName1.Text = existData.Partname1;
+                        _images[2] = TbPartName2.Text = existData.Partname2;
+                        _images[3] = TbPartName3.Text = existData.Partname3;
+
 
 
 
@@ -334,15 +310,14 @@ namespace SmartCardTool.ChildFrm
                             return;
                         }
 
-                        //InvokeCtrl(LbStatus, STATUSTOUCH);
 
-                        LbStatus.Text = STATUSTOUCH;
-                        string[] err = LbStatus.Text.Split(':');
-                        if (err[0] == "A1")
-                        {
-                            LbReady.BackColor = Color.White;
-                            LbError.BackColor = Color.Red;
-                        }
+                        //LbStatus.Text = STATUSTOUCH;
+                        //string[] err = LbStatus.Text.Split(':');
+                        //if (err[0] == "A1")
+                        //{
+                        //    LbReady.BackColor = Color.White;
+                        //    LbError.BackColor = Color.Red;
+                        //}
 
                         timer.Interval = 250;
                         timer.Enabled = true;
@@ -352,12 +327,6 @@ namespace SmartCardTool.ChildFrm
                             existData.Partname1,
                             existData.Partname2,
                             existData.Partname3));
-
-                        //LbOK.BackColor = Color.GreenYellow; 
-
-                        //CallHttpClient(parts[0], parts[1], parts[2]);
-
-                        //var aa = ExecuteWithRetry(parts[0], parts[1], parts[2]);
 
                     }
                 }
@@ -369,100 +338,72 @@ namespace SmartCardTool.ChildFrm
             });
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            ExecuteWithRetry();
+            await ExecuteWithRetryAsync();
+
         }
 
-        public HttpResponseMessage ExecuteWithRetry()
+        public async Task<bool> ExecuteWithRetryAsync()
         {
-            HttpResponseMessage result = null;
-
-            string path = Param.DataPath;
-
-            if (!File.Exists(path))
+            try
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("") };
-            }
-            string data = File.ReadAllText(path);
-
-            string[] parts = data.Split(',');
-
-            var newjson = new PartNumber()
-            {
-                PartNoSubAssy = parts[0],
-                LotId = parts[1],
-                TimeStamp = parts[2],
-            };
-            string json = JsonConvert.SerializeObject(newjson, Formatting.Indented);
-
-            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-            string url = Param.UploadUrl;
-            bool success = false;
-            using (var client = new HttpClient())
-            {
-                do
+                var data = new PartNumber()
                 {
-                    result = client.PostAsync(url, httpContent).Result;
-                    success = result.IsSuccessStatusCode;
-                }
-                while (!success);
-            }
-
-            return result;
-        }
+                    PartNoSubAssy = _request[0],
+                    LotId = _request[1],
+                    TimeStamp = _request[2],
+                };
 
 
+                string json = JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
-        private async void CallHttpClient(string parts0, string parts1, string parts2)
-        {
-            var client = new HttpClient();
+                StringContent httpcontent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
+                string uri = "/api/v1/stock/receive";
 
-            var newjson = new PartNumber()
-            {
-                PartNoSubAssy = parts0,
-                LotId = parts1,
-                TimeStamp = parts2,
-            };
-            string json = JsonConvert.SerializeObject(newjson, Formatting.Indented);
-
-            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-            bool result = false;
-            while (!result)
-            {
-
-                var response = await client.PostAsync(Param.UploadUrl, httpContent);
-
-                if (response.IsSuccessStatusCode)
+                bool status = false;
+                int count = 5;
+                while (!status)
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+
+
+                    var timeRecordResp = await client.PostAsync(uri, httpcontent);
+
+                    if (timeRecordResp.IsSuccessStatusCode)
                     {
-                        if (File.Exists(Param.DataPath))
-                        {
-                            File.Delete(Param.DataPath);
-                        }
 
-                        await Task.Delay(100);
-                        timer1.Enabled = true;
-                        result = true; // exit while loop
+                        string result = timeRecordResp.StatusCode.ToString();
+
+                        if (timeRecordResp.StatusCode == HttpStatusCode.OK)
+                        {
+                            status = true;
+                        }
+                    }
+
+                    Thread.Sleep(200);
+                    count--;
+                    if (count == 0)
+                    {
+                        return false;
                     }
                 }
-                else
-                {
-                    await Task.Delay(3000);
-                }
+
+
+                return true;
 
             }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                return false;
 
+            }
         }
 
-        //private void InvokeStartPolling(Action a)
-        //{
-        //    this.BeginInvoke(new MethodInvoker(a));
-        //}
+
+
+
 
         private bool StartPolling()
         {
@@ -471,7 +412,6 @@ namespace SmartCardTool.ChildFrm
             {
                 return false;
             }
-            InvokeCtrl(LbStatus, STATUSTOUCH);
 
             timer.Interval = 250;
             timer.Enabled = true;
@@ -520,60 +460,70 @@ namespace SmartCardTool.ChildFrm
 
         private void StartProcess()
         {
-            InvokeStartProcess(() =>
+            InvokeStartProcess(async () =>
             {
                 try
                 {
                     byte[] idm = _adapter.GetIdm();
-                    //Label_IDm.Text = BitConverter.ToString(idm);
 
-                    //Label_Message.Text = STATUSPROCESS;
-
-
-
-                    //InvokeCtrl(LbStatus, STATUSPROCESS);
                     LbStatus.Text = STATUSPROCESS;
-                    LbWriteTag.BackColor = Color.GreenYellow;
-                    LbReady.BackColor = Color.GreenYellow;
+                    LbWriteTag.BackColor = Color.FromArgb(255, 255, 0);
+                    LbReady.BackColor = Color.FromArgb(255, 255, 255);
                     LbError.BackColor = Color.White;
 
                     this.Refresh();
-
                     _smartcard.SetIdm(idm);
 
                     _smartcard.StartProcess();
 
-                    //InvokeCtrl(LbStatus, STATUSCOMPLETED);
-
                     LbStatus.Text = STATUSCOMPLETED;
-                    LbOK.BackColor = Color.GreenYellow;
+                    LbOK.BackColor = Color.FromArgb(85, 255, 85);
                     LbNG.BackColor = Color.DarkRed;
 
                     _adapter.CloseCard();
 
-                    var sendConfirn = ExecuteWithRetry();
-
-                    Sound(Param.CompleteSound);
-
-
-
-                    switch (_smartcard.SelectedFunction)
+                    var result = await ExecuteWithRetryAsync();
+                    if (result)
                     {
-                        case SmartTag.SmartTagFunctions.ReadUserData:
+                        LbSendToStock.BackColor = Color.FromArgb(255, 255, 0);
+                        Sound(Param.CompleteSound);
+                        LbCompleted.BackColor = Color.FromArgb(85, 255, 85);
+                        Thread.Sleep(1000);
 
-                        case SmartTag.SmartTagFunctions.ReadFromCardArea:
-                            //ShowReadData(_smartcard.GetUserData());
-                            break;
 
-                        default:
-                            break;
+                        if (File.Exists(Param.DataPath))
+                        {
+                            File.Delete(Param.DataPath);
+                        }
+                        Thread.Sleep(1000);
+                        
+
+                        timer2.Enabled = true;
+
                     }
+
+
+
+                    //StartPolling();
+
+
+
+
+                    //switch (_smartcard.SelectedFunction)
+                    //{
+                    //    case SmartTag.SmartTagFunctions.ReadUserData:
+
+                    //    case SmartTag.SmartTagFunctions.ReadFromCardArea:
+                    //        //ShowReadData(_smartcard.GetUserData());
+                    //        break;
+
+                    //    default:
+                    //        break;
+                    //}
                 }
                 catch (Exception ex)
                 {
-                    //WriteLog(ex.Message);
 
-                    InvokeCtrl(LbStatus, ex.Message);
                     LbStatus.Text = ex.Message;
                     LbError.BackColor = Color.Red;
                     LbReady.BackColor = Color.White;
@@ -592,116 +542,15 @@ namespace SmartCardTool.ChildFrm
                 soundPlayer.Play(); // can also use soundPlayer.PlaySync()
             }
         }
+                      
 
-
-        private void InvokeCtrl(Control ctrl, string message)
+        private void timer2_Tick(object sender, EventArgs e)
         {
-            if (ctrl.InvokeRequired)
-            {
-                ctrl.Invoke(new Action(() =>
-                {
-                    ctrl.Text = message;
-                }));
-            }
-            else
-            {
-                ctrl.Text = message;
-            }
+            timer1.Enabled = true;
+            timer2.Enabled = false;
+            ResetLamp();
+            LbReady.BackColor = Color.FromArgb(85, 255, 85);
+            LbStatus.Text = STATUSREADY;
         }
-        private void InvokeLampRed(Control ctrl, bool status)
-        {
-            if (status)
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(255, 85, 85);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(255, 85, 85);
-                }
-            }
-            else
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(255, 255, 255);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(255, 255, 255);
-                }
-            }
-        }
-        private void InvokeLampGreen(Control ctrl, bool status)
-        {
-            if (status)
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(85, 255, 85);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(85, 255, 85);
-                }
-            }
-            else
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(0, 0, 0);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(0, 0, 0);
-                }
-            }
-        }
-        private void InvokeLampOrange(Control ctrl, bool status)
-        {
-            if (status)
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(255, 104, 0);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(255, 104, 0);
-                }
-            }
-            else
-            {
-                if (ctrl.InvokeRequired)
-                {
-                    ctrl.Invoke(new Action(() =>
-                    {
-                        ctrl.BackColor = Color.FromArgb(0, 0, 0);
-                    }));
-                }
-                else
-                {
-                    ctrl.BackColor = Color.FromArgb(0, 0, 0);
-                }
-            }
-        }
-
-
     }
 }

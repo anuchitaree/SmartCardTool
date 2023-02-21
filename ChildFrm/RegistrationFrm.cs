@@ -102,6 +102,13 @@ namespace SmartCardTool.ChildFrm
                 {
                     var existData = await db.Smartcards
                         .Where(x => x.Partnumber == TbSearchPartnumber.Text.Trim()).ToListAsync();
+
+                    TbPartName0.Text = TbPartName0.Text == string.Empty ? " " : TbPartName0.Text;
+                    TbPartName1.Text = TbPartName1.Text == string.Empty ? " " : TbPartName1.Text;
+                    TbPartName2.Text = TbPartName2.Text == string.Empty ? " " : TbPartName2.Text;
+                    TbPartName3.Text = TbPartName3.Text == string.Empty ? " " : TbPartName3.Text;
+
+
                     if (existData.Count > 0)
                     {
                         foreach (var item in existData)
