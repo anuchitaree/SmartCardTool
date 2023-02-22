@@ -28,6 +28,8 @@ namespace SmartCardTool.Modules
 
         public static string DataPath = Environment.CurrentDirectory + "\\Setting\\Smart card manual.pdf";
 
+        public static string StockPath = "";
+
         public static string UploadUrl = "";
     }
 }

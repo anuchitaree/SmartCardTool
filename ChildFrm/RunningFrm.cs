@@ -2,6 +2,7 @@
 using AioiSystems.DotModule;
 using AioiSystems.DotModule.Barcode;
 using Newtonsoft.Json;
+using SmartCard_API.Models;
 using SmartCardTool.Models;
 using SmartCardTool.Modules;
 using SmartCartTool_API.Models;
@@ -38,7 +39,7 @@ namespace SmartCardTool.ChildFrm
 
         private string[] _images = new string[4];
         private string[] _request = new string[3];
-
+        private bool _fault = false;
 
         private HttpClient client;
 
@@ -71,7 +72,10 @@ namespace SmartCardTool.ChildFrm
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ScanPartnumberDotTxt();
+            if (_fault == false)
+            {
+                ScanPartnumberDotTxt();
+            }
         }
 
         private void BtnReloadApp_Click(object sender, EventArgs e)
@@ -133,7 +137,7 @@ namespace SmartCardTool.ChildFrm
 
             InitSmartCardReader();
             ResetLamp();
-
+            _fault = false;
         }
 
 
@@ -146,6 +150,7 @@ namespace SmartCardTool.ChildFrm
             LbReady.BackColor = LbReceived.BackColor = LbFindDB.BackColor = LbWriteTag.BackColor
                = LbSendToStock.BackColor = LbCompleted.BackColor = LbError.BackColor = Color.White;
             TbPartName0.Text = TbPartName1.Text = TbPartName2.Text = TbPartName3.Text = LbStatus.Text = "";
+            _fault = false;
         }
 
 
@@ -177,7 +182,7 @@ namespace SmartCardTool.ChildFrm
 
                         LbError.BackColor = Color.FromArgb(255, 85, 85);
 
-
+                        
                         return;
                     }
 
@@ -363,7 +368,7 @@ namespace SmartCardTool.ChildFrm
                 string uri = "/api/v1/stock/receive";
 
                 bool status = false;
-                int count = 5;
+                int count = 2;
                 while (!status)
                 {
 
@@ -372,10 +377,13 @@ namespace SmartCardTool.ChildFrm
 
                     if (timeRecordResp.IsSuccessStatusCode)
                     {
+                        var responseString = await timeRecordResp.Content.ReadAsStringAsync();
 
-                        string result = timeRecordResp.StatusCode.ToString();
+                        var object1 = JsonConvert.DeserializeObject<StatusModel>(responseString);
 
-                        if (timeRecordResp.StatusCode == HttpStatusCode.OK)
+                        //string result = timeRecordResp.StatusCode.ToString();
+
+                        if (timeRecordResp.StatusCode == HttpStatusCode.OK && object1.Status=="ok")
                         {
                             status = true;
                         }
@@ -478,8 +486,7 @@ namespace SmartCardTool.ChildFrm
 
                     LbStatus.Text = STATUSCOMPLETED;
                     LbOK.BackColor = Color.FromArgb(85, 255, 85);
-                    LbNG.BackColor = Color.DarkRed;
-
+                    LbNG.BackColor = Color.FromArgb(60, 60, 60);
                     _adapter.CloseCard();
 
                     var result = await ExecuteWithRetryAsync();
@@ -500,6 +507,27 @@ namespace SmartCardTool.ChildFrm
 
                         timer2.Enabled = true;
 
+                    }
+                    else
+                    {
+                        LbStatus.Text = "Stock Monitoring disconection";
+
+                        LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
+                        LbError.BackColor= Color.FromArgb(255, 0, 0);
+
+                        LbCompleted.BackColor = Color.FromArgb(255, 255, 255);
+
+                        _fault = true;
+
+                        //Thread.Sleep(1000);
+
+                        //if (File.Exists(Param.DataPath))
+                        //{
+                        //    File.Delete(Param.DataPath);
+                        //}
+                        //Thread.Sleep(1000);
+
+                        //timer2.Enabled = true;
                     }
 
 
@@ -545,6 +573,20 @@ namespace SmartCardTool.ChildFrm
                       
 
         private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            timer2.Enabled = false;
+            ResetLamp();
+            LbReady.BackColor = Color.FromArgb(85, 255, 85);
+            LbStatus.Text = STATUSREADY;
+        }
+
+        private void BtnReSendStock_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnErrorReset_Click(object sender, EventArgs e)
         {
             timer1.Enabled = true;
             timer2.Enabled = false;

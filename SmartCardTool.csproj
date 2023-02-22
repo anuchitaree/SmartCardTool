@@ -252,6 +252,7 @@
     <Compile Include="Models\PartNumber.cs" />
     <Compile Include="Models\Pattern.cs" />
     <Compile Include="Models\Smartcard.cs" />
+    <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Modules\Initial\DataGridViewInit.cs" />
     <Compile Include="Modules\Initial\Serial_Port.cs" />
     <Compile Include="Modules\Param.cs" />

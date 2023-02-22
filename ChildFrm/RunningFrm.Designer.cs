@@ -58,6 +58,9 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnStart = new System.Windows.Forms.Button();
             this.BtnReloadApp = new System.Windows.Forms.Button();
+            this.BtnReSendStock = new System.Windows.Forms.Button();
+            this.BtnErrorReset = new System.Windows.Forms.Button();
+            this.LbAutoRun = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -73,17 +76,19 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.LbStatus, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.LbStatus, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.LbAutoRun, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(884, 948);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -120,7 +125,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
+            this.button1.Text = "Temp";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -215,19 +220,19 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(732, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 13);
+            this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Part name (at row3)";
+            this.label5.Text = "Part name 3";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(591, 3);
+            this.label4.Location = new System.Drawing.Point(591, 4);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 13);
+            this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Part name (at row2)";
+            this.label4.Text = "Part name 2";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label3
@@ -235,9 +240,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(449, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 13);
+            this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Part name (at row1)";
+            this.label3.Text = "Part name 1";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
@@ -326,9 +331,9 @@
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel2.Controls.Add(this.tableLayoutPanel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 103);
+            this.panel2.Location = new System.Drawing.Point(3, 153);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(878, 721);
+            this.panel2.Size = new System.Drawing.Size(878, 712);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -343,7 +348,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(878, 721);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(878, 712);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // LbOK
@@ -353,7 +358,7 @@
             this.LbOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LbOK.Location = new System.Drawing.Point(3, 0);
             this.LbOK.Name = "LbOK";
-            this.LbOK.Size = new System.Drawing.Size(433, 721);
+            this.LbOK.Size = new System.Drawing.Size(433, 712);
             this.LbOK.TabIndex = 1;
             this.LbOK.Text = "OK";
             this.LbOK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,26 +371,29 @@
             this.LbNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LbNG.Location = new System.Drawing.Point(442, 0);
             this.LbNG.Name = "LbNG";
-            this.LbNG.Size = new System.Drawing.Size(433, 721);
+            this.LbNG.Size = new System.Drawing.Size(433, 712);
             this.LbNG.TabIndex = 1;
             this.LbNG.Text = "NG";
             this.LbNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.BtnStart, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.BtnReloadApp, 1, 0);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.Controls.Add(this.BtnStart, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnReloadApp, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnReSendStock, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnErrorReset, 4, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 830);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 871);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(878, 81);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(878, 44);
             this.tableLayoutPanel2.TabIndex = 14;
             // 
             // BtnStart
@@ -394,7 +402,7 @@
             this.BtnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnStart.Location = new System.Drawing.Point(581, 3);
             this.BtnStart.Name = "BtnStart";
-            this.BtnStart.Size = new System.Drawing.Size(294, 75);
+            this.BtnStart.Size = new System.Drawing.Size(144, 38);
             this.BtnStart.TabIndex = 0;
             this.BtnStart.Text = "Start";
             this.BtnStart.UseVisualStyleBackColor = true;
@@ -404,13 +412,49 @@
             // 
             this.BtnReloadApp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnReloadApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReloadApp.Location = new System.Drawing.Point(292, 3);
+            this.BtnReloadApp.Location = new System.Drawing.Point(342, 3);
             this.BtnReloadApp.Name = "BtnReloadApp";
-            this.BtnReloadApp.Size = new System.Drawing.Size(283, 75);
+            this.BtnReloadApp.Size = new System.Drawing.Size(233, 38);
             this.BtnReloadApp.TabIndex = 1;
             this.BtnReloadApp.Text = "Reload App";
             this.BtnReloadApp.UseVisualStyleBackColor = true;
             this.BtnReloadApp.Click += new System.EventHandler(this.BtnReloadApp_Click);
+            // 
+            // BtnReSendStock
+            // 
+            this.BtnReSendStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnReSendStock.Location = new System.Drawing.Point(3, 3);
+            this.BtnReSendStock.Name = "BtnReSendStock";
+            this.BtnReSendStock.Size = new System.Drawing.Size(94, 38);
+            this.BtnReSendStock.TabIndex = 2;
+            this.BtnReSendStock.Text = "ReSend StockMonitoring";
+            this.BtnReSendStock.UseVisualStyleBackColor = true;
+            this.BtnReSendStock.Click += new System.EventHandler(this.BtnReSendStock_Click);
+            // 
+            // BtnErrorReset
+            // 
+            this.BtnErrorReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnErrorReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnErrorReset.Location = new System.Drawing.Point(731, 3);
+            this.BtnErrorReset.Name = "BtnErrorReset";
+            this.BtnErrorReset.Size = new System.Drawing.Size(144, 38);
+            this.BtnErrorReset.TabIndex = 3;
+            this.BtnErrorReset.Text = "Error Reset";
+            this.BtnErrorReset.UseVisualStyleBackColor = true;
+            this.BtnErrorReset.Click += new System.EventHandler(this.BtnErrorReset_Click);
+            // 
+            // LbAutoRun
+            // 
+            this.LbAutoRun.AutoSize = true;
+            this.LbAutoRun.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LbAutoRun.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LbAutoRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LbAutoRun.Location = new System.Drawing.Point(3, 100);
+            this.LbAutoRun.Name = "LbAutoRun";
+            this.LbAutoRun.Size = new System.Drawing.Size(878, 50);
+            this.LbAutoRun.TabIndex = 15;
+            this.LbAutoRun.Text = "AUTO RUN";
+            this.LbAutoRun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer
             // 
@@ -479,5 +523,8 @@
         private System.Windows.Forms.Button BtnReloadApp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label LbAutoRun;
+        private System.Windows.Forms.Button BtnReSendStock;
+        private System.Windows.Forms.Button BtnErrorReset;
     }
 }
