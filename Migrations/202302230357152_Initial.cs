@@ -13,7 +13,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Partnumber = c.String(nullable: false, maxLength: 20),
-                        Partname0 = c.String(maxLength: 3),
+                        Partname0 = c.String(maxLength: 13),
                         Partname1 = c.String(maxLength: 8),
                         Partname2 = c.String(maxLength: 8),
                         Partname3 = c.String(maxLength: 8),

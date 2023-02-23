@@ -58,8 +58,9 @@ namespace SmartCardTool.ChildFrm
 
             FormLoading();
 
+
             client = new HttpClient();
-            client.BaseAddress = new Uri($"http://localhost:5217");
+            client.BaseAddress = new Uri("https://55a3-1-47-134-10.ap.ngrok.io");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -350,6 +351,10 @@ namespace SmartCardTool.ChildFrm
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            _request[0] = "TG116420-898";
+            _request[1] = "150";
+            _request[2] = "2023-02-22T12:18:53";
+
             await ExecuteWithRetryAsync();
 
         }
@@ -361,7 +366,7 @@ namespace SmartCardTool.ChildFrm
                 var data = new PartNumber()
                 {
                     PartNoSubAssy = _request[0],
-                    LotId = _request[1],
+                    LotId = Convert.ToInt32(_request[1]),
                     TimeStamp = _request[2],
                 };
 
@@ -370,36 +375,49 @@ namespace SmartCardTool.ChildFrm
 
                 StringContent httpcontent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                string uri = "/api/v1/stock/receive";
+                //https://55a3-1-47-134-10.ap.ngrok.io/end_write_sub_assy
+
+                string uri = "/api/v1/end_write_sub_assy";
+
+                //string uri = "/api/v1/stock/receive";
 
                 bool status = false;
                 int count = 2;
                 while (!status)
                 {
-
-
-                    var timeRecordResp = await client.PostAsync(uri, httpcontent);
-
-                    if (timeRecordResp.IsSuccessStatusCode)
+                    try
                     {
-                        var responseString = await timeRecordResp.Content.ReadAsStringAsync();
 
-                        var object1 = JsonConvert.DeserializeObject<StatusModel>(responseString);
 
-                        //string result = timeRecordResp.StatusCode.ToString();
+                        var timeRecordResp = await client.PostAsync(uri, httpcontent);
 
-                        if (timeRecordResp.StatusCode == HttpStatusCode.OK && object1.Status == "ok")
+                        if (timeRecordResp.IsSuccessStatusCode)
                         {
-                            status = true;
+                            var responseString = await timeRecordResp.Content.ReadAsStringAsync();
+
+                            var object1 = JsonConvert.DeserializeObject<StatusModel>(responseString);
+
+                            //string result = timeRecordResp.StatusCode.ToString();
+
+                            if (timeRecordResp.StatusCode == HttpStatusCode.OK && object1.Status == "ok")
+                            {
+                                status = true;
+                            }
+                        }
+
+                        Thread.Sleep(200);
+                        count--;
+                        if (count == 0)
+                        {
+                            return false;
                         }
                     }
-
-                    Thread.Sleep(200);
-                    count--;
-                    if (count == 0)
+                    catch (Exception ex)
                     {
-                        return false;
+                        string msg = ex.Message;
+                        throw;
                     }
+
                 }
 
 
