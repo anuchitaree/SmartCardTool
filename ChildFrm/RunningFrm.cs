@@ -39,6 +39,10 @@ namespace SmartCardTool.ChildFrm
 
         private string[] _images = new string[4];
         private string[] _request = new string[3];
+
+        private bool _auto;
+        private bool _man;
+        private bool _autorun;
         private bool _fault = false;
 
         private HttpClient client;
@@ -50,7 +54,7 @@ namespace SmartCardTool.ChildFrm
 
         private void RunningFrm_Load(object sender, EventArgs e)
         {
-
+            _man = true;
 
             FormLoading();
 
@@ -138,6 +142,7 @@ namespace SmartCardTool.ChildFrm
             InitSmartCardReader();
             ResetLamp();
             _fault = false;
+            BtnManual.BackColor = Color.FromArgb(85, 255, 85);
         }
 
 
@@ -182,7 +187,7 @@ namespace SmartCardTool.ChildFrm
 
                         LbError.BackColor = Color.FromArgb(255, 85, 85);
 
-                        
+
                         return;
                     }
 
@@ -383,7 +388,7 @@ namespace SmartCardTool.ChildFrm
 
                         //string result = timeRecordResp.StatusCode.ToString();
 
-                        if (timeRecordResp.StatusCode == HttpStatusCode.OK && object1.Status=="ok")
+                        if (timeRecordResp.StatusCode == HttpStatusCode.OK && object1.Status == "ok")
                         {
                             status = true;
                         }
@@ -503,7 +508,7 @@ namespace SmartCardTool.ChildFrm
                             File.Delete(Param.DataPath);
                         }
                         Thread.Sleep(1000);
-                        
+
 
                         timer2.Enabled = true;
 
@@ -513,7 +518,7 @@ namespace SmartCardTool.ChildFrm
                         LbStatus.Text = "Stock Monitoring disconection";
 
                         LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
-                        LbError.BackColor= Color.FromArgb(255, 0, 0);
+                        LbError.BackColor = Color.FromArgb(255, 0, 0);
 
                         LbCompleted.BackColor = Color.FromArgb(255, 255, 255);
 
@@ -570,7 +575,7 @@ namespace SmartCardTool.ChildFrm
                 soundPlayer.Play(); // can also use soundPlayer.PlaySync()
             }
         }
-                      
+
 
         private void timer2_Tick(object sender, EventArgs e)
         {
@@ -593,6 +598,42 @@ namespace SmartCardTool.ChildFrm
             ResetLamp();
             LbReady.BackColor = Color.FromArgb(85, 255, 85);
             LbStatus.Text = STATUSREADY;
+        }
+
+        private void BtnAuto_Click(object sender, EventArgs e)
+        {
+            _auto = true;
+            _man = false;
+            BtnAuto.BackColor = Color.FromArgb(85, 255, 85);
+            BtnManual.BackColor = Color.FromArgb(255, 255, 255);
+
+        }
+
+        private void BtnManual_Click(object sender, EventArgs e)
+        {
+            _man = true;
+            _auto = false;
+            BtnAuto.BackColor = Color.FromArgb(255, 255, 255);
+            BtnManual.BackColor = Color.FromArgb(85, 255, 85);
+        }
+
+        private void BtnAutoRun_Click(object sender, EventArgs e)
+        {
+            if (_auto == true)
+            {
+                _autorun = true;
+
+                BtnAutoRun.BackColor = Color.FromArgb(255, 255, 0);
+            }
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+
+            _autorun = false;
+
+            BtnAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+
         }
     }
 }
