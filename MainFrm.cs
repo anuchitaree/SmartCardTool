@@ -28,23 +28,7 @@ namespace SmartCardTool
         private void MainFrm_Load(object sender, EventArgs e)
         {
 
-            //Param.ConnectionString = configBuilder.GetSection("ConnectionStrings")["defaultConnection"]!;
-
-            string path1 = @"c:\SmartCardTool\appsettings.json"; /*Environment.CurrentDirectory + "\\appsettings.json";*/
-
-
-            using (var reader = new StreamReader(path1))
-            {
-
-                string readline  =reader.ReadToEnd();
-
-                //var appSettings = JsonConvert.DeserializeObject<AppSettings>(reader.ReadToEnd());
-
-                var appSettings = JsonConvert.DeserializeObject<AppSettings>(readline);
-
-                Param.DataPath = appSettings.Path.DataPath;
-                Param.UploadUrl = appSettings.Path.UploadUrl;
-            }
+            FormLoad();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,14 +54,7 @@ namespace SmartCardTool
 
         private void instructionManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = Param.manual;
-            if (!File.Exists(path)) return;
-
-
-            string cmd = @"--kiosk {path}";
-            ProcessStartInfo startInfo = new ProcessStartInfo(cmd);
-            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
-            Process.Start("firefox.exe", path);
+            InstructionManual();
         }
 
         private void licensedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,7 +63,18 @@ namespace SmartCardTool
             frm.ShowDialog();
         }
 
-        //=========
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Param.Pages == 0)
+            {
+                CloseOpenChildForm(new RunningFrm());
+
+            }
+        }
+
+        //==== Sub Program ===//
+
+
         private void CloseOpenChildForm(Form switchForm)
         {
 
@@ -121,16 +109,57 @@ namespace SmartCardTool
                 MessageBox.Show("Error message : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void FormLoad()
         {
-            if (Param.Pages == 0)
-            {
-                CloseOpenChildForm(new RunningFrm());
+            string path = @"c:\SmartCardTool";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
+
+            string path1 = @"c:\SmartCardTool\appsettings.json"; /*Environment.CurrentDirectory + "\\appsettings.json";*/
+            if (!File.Exists(path1))
+            {
+                var paths = new Paths()
+                {
+                    DataPath = "C:\\SmartCardTool\\partnumber.txt",
+                    UploadUrl = "http://localhost:5217",
+                    HoldResultSec=10,
+
+                };
+                var sett = new AppSettings()
+                {
+                    Path = paths
+                };
+                string json = JsonConvert.SerializeObject(sett, Formatting.Indented);
+
+                File.WriteAllText(path1, json);
+
+            }
+
+            using (var reader = new StreamReader(path1))
+            {
+                string readline = reader.ReadToEnd();
+
+                var appSettings = JsonConvert.DeserializeObject<AppSettings>(readline);
+
+                Param.DataPath = appSettings.Path.DataPath;
+                Param.UploadUrl = appSettings.Path.UploadUrl;
+                Param.HoldResultSec=appSettings.Path.HoldResultSec;
             }
         }
 
+        private void InstructionManual()
+        {
+            string path = Param.manual;
+            if (!File.Exists(path)) return;
 
+
+            string cmd = @"--kiosk {path}";
+            ProcessStartInfo startInfo = new ProcessStartInfo(cmd);
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            Process.Start("firefox.exe", path);
+        }
     }
 }

@@ -208,6 +208,12 @@
     <Compile Include="ChildFrm\PatternFrm.Designer.cs">
       <DependentUpon>PatternFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFrm\ReceiveFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFrm\ReceiveFrm.Designer.cs">
+      <DependentUpon>ReceiveFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFrm\RegistrationFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +255,7 @@
     <Compile Include="Models\Pattern.cs" />
     <Compile Include="Models\Smartcard.cs" />
     <Compile Include="Models\StatusModel.cs" />
+    <Compile Include="Modules\InputDialog.cs" />
     <Compile Include="Modules\Initial\DataGridViewInit.cs" />
     <Compile Include="Modules\Initial\Serial_Port.cs" />
     <Compile Include="Modules\Param.cs" />
@@ -265,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFrm\PatternFrm.resx">
       <DependentUpon>PatternFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFrm\ReceiveFrm.resx">
+      <DependentUpon>ReceiveFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFrm\RegistrationFrm.resx">
       <DependentUpon>RegistrationFrm.cs</DependentUpon>

@@ -56,14 +56,7 @@
             this.LbOK = new System.Windows.Forms.Label();
             this.LbNG = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnStart = new System.Windows.Forms.Button();
-            this.BtnReloadApp = new System.Windows.Forms.Button();
-            this.BtnReSendStock = new System.Windows.Forms.Button();
             this.BtnErrorReset = new System.Windows.Forms.Button();
-            this.LbAutoRun = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.BtnAuto = new System.Windows.Forms.Button();
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnReceiveData = new System.Windows.Forms.Button();
@@ -72,6 +65,11 @@
             this.BtnSendStock = new System.Windows.Forms.Button();
             this.BtnAutoRun = new System.Windows.Forms.Button();
             this.BtnStop = new System.Windows.Forms.Button();
+            this.LbAutoRun = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer_M = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -167,7 +165,7 @@
             this.LbSendToStock.Name = "LbSendToStock";
             this.LbSendToStock.Size = new System.Drawing.Size(91, 32);
             this.LbSendToStock.TabIndex = 15;
-            this.LbSendToStock.Text = "Sent to Stock";
+            this.LbSendToStock.Text = "Send Stock";
             this.LbSendToStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LbWriteTag
@@ -189,7 +187,7 @@
             this.LbFindDB.Name = "LbFindDB";
             this.LbFindDB.Size = new System.Drawing.Size(91, 32);
             this.LbFindDB.TabIndex = 15;
-            this.LbFindDB.Text = "Found Data";
+            this.LbFindDB.Text = "Find DB";
             this.LbFindDB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LbReceived
@@ -393,8 +391,6 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.Controls.Add(this.BtnStart, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.BtnErrorReset, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnAuto, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnManual, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnReceiveData, 1, 1);
@@ -403,8 +399,7 @@
             this.tableLayoutPanel2.Controls.Add(this.BtnSendStock, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.BtnAutoRun, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.BtnStop, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.BtnReloadApp, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BtnReSendStock, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.BtnErrorReset, 5, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 771);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -415,50 +410,97 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(878, 144);
             this.tableLayoutPanel2.TabIndex = 14;
             // 
-            // BtnStart
-            // 
-            this.BtnStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnStart.Location = new System.Drawing.Point(581, 3);
-            this.BtnStart.Name = "BtnStart";
-            this.BtnStart.Size = new System.Drawing.Size(144, 42);
-            this.BtnStart.TabIndex = 0;
-            this.BtnStart.Text = "Start";
-            this.BtnStart.UseVisualStyleBackColor = true;
-            this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
-            // 
-            // BtnReloadApp
-            // 
-            this.BtnReloadApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReloadApp.Location = new System.Drawing.Point(731, 51);
-            this.BtnReloadApp.Name = "BtnReloadApp";
-            this.BtnReloadApp.Size = new System.Drawing.Size(144, 31);
-            this.BtnReloadApp.TabIndex = 1;
-            this.BtnReloadApp.Text = "Reload App";
-            this.BtnReloadApp.UseVisualStyleBackColor = true;
-            this.BtnReloadApp.Click += new System.EventHandler(this.BtnReloadApp_Click);
-            // 
-            // BtnReSendStock
-            // 
-            this.BtnReSendStock.Location = new System.Drawing.Point(581, 51);
-            this.BtnReSendStock.Name = "BtnReSendStock";
-            this.BtnReSendStock.Size = new System.Drawing.Size(94, 42);
-            this.BtnReSendStock.TabIndex = 2;
-            this.BtnReSendStock.Text = "ReSend StockMonitoring";
-            this.BtnReSendStock.UseVisualStyleBackColor = true;
-            this.BtnReSendStock.Click += new System.EventHandler(this.BtnReSendStock_Click);
-            // 
             // BtnErrorReset
             // 
             this.BtnErrorReset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnErrorReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnErrorReset.Location = new System.Drawing.Point(731, 3);
+            this.BtnErrorReset.Location = new System.Drawing.Point(731, 97);
             this.BtnErrorReset.Name = "BtnErrorReset";
-            this.BtnErrorReset.Size = new System.Drawing.Size(144, 42);
+            this.BtnErrorReset.Size = new System.Drawing.Size(144, 44);
             this.BtnErrorReset.TabIndex = 3;
             this.BtnErrorReset.Text = "Error Reset";
             this.BtnErrorReset.UseVisualStyleBackColor = true;
             this.BtnErrorReset.Click += new System.EventHandler(this.BtnErrorReset_Click);
+            // 
+            // BtnAuto
+            // 
+            this.BtnAuto.Location = new System.Drawing.Point(3, 3);
+            this.BtnAuto.Name = "BtnAuto";
+            this.BtnAuto.Size = new System.Drawing.Size(90, 41);
+            this.BtnAuto.TabIndex = 4;
+            this.BtnAuto.Text = "AUTO";
+            this.BtnAuto.UseVisualStyleBackColor = true;
+            this.BtnAuto.Click += new System.EventHandler(this.BtnAuto_Click);
+            // 
+            // BtnManual
+            // 
+            this.BtnManual.Location = new System.Drawing.Point(103, 3);
+            this.BtnManual.Name = "BtnManual";
+            this.BtnManual.Size = new System.Drawing.Size(89, 41);
+            this.BtnManual.TabIndex = 5;
+            this.BtnManual.Text = "MANUAL";
+            this.BtnManual.UseVisualStyleBackColor = true;
+            this.BtnManual.Click += new System.EventHandler(this.BtnManual_Click);
+            // 
+            // BtnReceiveData
+            // 
+            this.BtnReceiveData.Location = new System.Drawing.Point(103, 50);
+            this.BtnReceiveData.Name = "BtnReceiveData";
+            this.BtnReceiveData.Size = new System.Drawing.Size(89, 41);
+            this.BtnReceiveData.TabIndex = 5;
+            this.BtnReceiveData.Text = "Receive data";
+            this.BtnReceiveData.UseVisualStyleBackColor = true;
+            this.BtnReceiveData.Click += new System.EventHandler(this.BtnReceiveData_Click);
+            // 
+            // BtnFindDB
+            // 
+            this.BtnFindDB.Location = new System.Drawing.Point(203, 50);
+            this.BtnFindDB.Name = "BtnFindDB";
+            this.BtnFindDB.Size = new System.Drawing.Size(89, 41);
+            this.BtnFindDB.TabIndex = 5;
+            this.BtnFindDB.Text = "Find DB";
+            this.BtnFindDB.UseVisualStyleBackColor = true;
+            this.BtnFindDB.Click += new System.EventHandler(this.BtnFindDB_Click);
+            // 
+            // BtnWriteTAG
+            // 
+            this.BtnWriteTAG.Location = new System.Drawing.Point(103, 97);
+            this.BtnWriteTAG.Name = "BtnWriteTAG";
+            this.BtnWriteTAG.Size = new System.Drawing.Size(89, 42);
+            this.BtnWriteTAG.TabIndex = 5;
+            this.BtnWriteTAG.Text = "Write TAG";
+            this.BtnWriteTAG.UseVisualStyleBackColor = true;
+            this.BtnWriteTAG.Click += new System.EventHandler(this.BtnWriteTAG_Click);
+            // 
+            // BtnSendStock
+            // 
+            this.BtnSendStock.Location = new System.Drawing.Point(203, 97);
+            this.BtnSendStock.Name = "BtnSendStock";
+            this.BtnSendStock.Size = new System.Drawing.Size(89, 42);
+            this.BtnSendStock.TabIndex = 5;
+            this.BtnSendStock.Text = "Send Stock";
+            this.BtnSendStock.UseVisualStyleBackColor = true;
+            this.BtnSendStock.Click += new System.EventHandler(this.BtnSendStock_Click);
+            // 
+            // BtnAutoRun
+            // 
+            this.BtnAutoRun.Location = new System.Drawing.Point(3, 50);
+            this.BtnAutoRun.Name = "BtnAutoRun";
+            this.BtnAutoRun.Size = new System.Drawing.Size(90, 41);
+            this.BtnAutoRun.TabIndex = 4;
+            this.BtnAutoRun.Text = "AUTO RUN";
+            this.BtnAutoRun.UseVisualStyleBackColor = true;
+            this.BtnAutoRun.Click += new System.EventHandler(this.BtnAutoRun_Click);
+            // 
+            // BtnStop
+            // 
+            this.BtnStop.Location = new System.Drawing.Point(3, 97);
+            this.BtnStop.Name = "BtnStop";
+            this.BtnStop.Size = new System.Drawing.Size(90, 42);
+            this.BtnStop.TabIndex = 4;
+            this.BtnStop.Text = "STOP";
+            this.BtnStop.UseVisualStyleBackColor = true;
+            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // LbAutoRun
             // 
@@ -486,81 +528,9 @@
             this.timer2.Interval = 10000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // BtnAuto
+            // timer_M
             // 
-            this.BtnAuto.Location = new System.Drawing.Point(3, 3);
-            this.BtnAuto.Name = "BtnAuto";
-            this.BtnAuto.Size = new System.Drawing.Size(90, 42);
-            this.BtnAuto.TabIndex = 4;
-            this.BtnAuto.Text = "AUTO";
-            this.BtnAuto.UseVisualStyleBackColor = true;
-            this.BtnAuto.Click += new System.EventHandler(this.BtnAuto_Click);
-            // 
-            // BtnManual
-            // 
-            this.BtnManual.Location = new System.Drawing.Point(103, 3);
-            this.BtnManual.Name = "BtnManual";
-            this.BtnManual.Size = new System.Drawing.Size(89, 42);
-            this.BtnManual.TabIndex = 5;
-            this.BtnManual.Text = "MANUAL";
-            this.BtnManual.UseVisualStyleBackColor = true;
-            this.BtnManual.Click += new System.EventHandler(this.BtnManual_Click);
-            // 
-            // BtnReceiveData
-            // 
-            this.BtnReceiveData.Location = new System.Drawing.Point(103, 51);
-            this.BtnReceiveData.Name = "BtnReceiveData";
-            this.BtnReceiveData.Size = new System.Drawing.Size(89, 42);
-            this.BtnReceiveData.TabIndex = 5;
-            this.BtnReceiveData.Text = "Receive data";
-            this.BtnReceiveData.UseVisualStyleBackColor = true;
-            // 
-            // BtnFindDB
-            // 
-            this.BtnFindDB.Location = new System.Drawing.Point(203, 51);
-            this.BtnFindDB.Name = "BtnFindDB";
-            this.BtnFindDB.Size = new System.Drawing.Size(89, 42);
-            this.BtnFindDB.TabIndex = 5;
-            this.BtnFindDB.Text = "Find DB";
-            this.BtnFindDB.UseVisualStyleBackColor = true;
-            // 
-            // BtnWriteTAG
-            // 
-            this.BtnWriteTAG.Location = new System.Drawing.Point(103, 99);
-            this.BtnWriteTAG.Name = "BtnWriteTAG";
-            this.BtnWriteTAG.Size = new System.Drawing.Size(89, 42);
-            this.BtnWriteTAG.TabIndex = 5;
-            this.BtnWriteTAG.Text = "Write TAG";
-            this.BtnWriteTAG.UseVisualStyleBackColor = true;
-            // 
-            // BtnSendStock
-            // 
-            this.BtnSendStock.Location = new System.Drawing.Point(203, 99);
-            this.BtnSendStock.Name = "BtnSendStock";
-            this.BtnSendStock.Size = new System.Drawing.Size(89, 42);
-            this.BtnSendStock.TabIndex = 5;
-            this.BtnSendStock.Text = "Send Stock";
-            this.BtnSendStock.UseVisualStyleBackColor = true;
-            // 
-            // BtnAutoRun
-            // 
-            this.BtnAutoRun.Location = new System.Drawing.Point(3, 51);
-            this.BtnAutoRun.Name = "BtnAutoRun";
-            this.BtnAutoRun.Size = new System.Drawing.Size(90, 42);
-            this.BtnAutoRun.TabIndex = 4;
-            this.BtnAutoRun.Text = "AUTO RUN";
-            this.BtnAutoRun.UseVisualStyleBackColor = true;
-            this.BtnAutoRun.Click += new System.EventHandler(this.BtnAutoRun_Click);
-            // 
-            // BtnStop
-            // 
-            this.BtnStop.Location = new System.Drawing.Point(3, 99);
-            this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(90, 42);
-            this.BtnStop.TabIndex = 4;
-            this.BtnStop.Text = "STOP";
-            this.BtnStop.UseVisualStyleBackColor = true;
-            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
+            this.timer_M.Tick += new System.EventHandler(this.timer_M_Tick);
             // 
             // RunningFrm
             // 
@@ -603,7 +573,6 @@
         private System.Windows.Forms.Label LbNG;
         private System.Windows.Forms.Label LbOK;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label LbError;
         private System.Windows.Forms.Label LbCompleted;
@@ -613,11 +582,9 @@
         private System.Windows.Forms.Label LbReceived;
         private System.Windows.Forms.Label LbReady;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button BtnReloadApp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label LbAutoRun;
-        private System.Windows.Forms.Button BtnReSendStock;
         private System.Windows.Forms.Button BtnErrorReset;
         private System.Windows.Forms.Button BtnAuto;
         private System.Windows.Forms.Button BtnManual;
@@ -627,5 +594,6 @@
         private System.Windows.Forms.Button BtnSendStock;
         private System.Windows.Forms.Button BtnAutoRun;
         private System.Windows.Forms.Button BtnStop;
+        private System.Windows.Forms.Timer timer_M;
     }
 }

@@ -26,10 +26,12 @@ namespace SmartCardTool.Modules
         public static string InCompleteSound = Environment.CurrentDirectory +  "\\Setting\\Alarm05.wav";
         public static string manual = Environment.CurrentDirectory + "\\Setting\\Smart card manual.pdf";
 
-        public static string DataPath = Environment.CurrentDirectory + "\\Setting\\Smart card manual.pdf";
+        public static string DataPath = "";
 
         public static string StockPath = "";
 
         public static string UploadUrl = "";
+
+        public static int HoldResultSec = 10 * 60;
     }
 }
