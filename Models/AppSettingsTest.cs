@@ -11,6 +11,8 @@
 
         public string UploadUrl { get; set; }
 
+        public string RoutePath { get; set; }
+
         public int HoldResultSec { get; set; }
 
     }

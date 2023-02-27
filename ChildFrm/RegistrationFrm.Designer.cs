@@ -77,7 +77,7 @@
             // BtnSave
             // 
             this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(786, 131);
+            this.BtnSave.Location = new System.Drawing.Point(689, 131);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(84, 50);
             this.BtnSave.TabIndex = 5;
@@ -95,7 +95,7 @@
             this.DgvList.Name = "DgvList";
             this.DgvList.ReadOnly = true;
             this.DgvList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DgvList.Size = new System.Drawing.Size(876, 404);
+            this.DgvList.Size = new System.Drawing.Size(772, 349);
             this.DgvList.TabIndex = 6;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             // 
@@ -103,7 +103,7 @@
             // 
             this.BtnListup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnListup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnListup.Location = new System.Drawing.Point(779, 3);
+            this.BtnListup.Location = new System.Drawing.Point(675, 3);
             this.BtnListup.Name = "BtnListup";
             this.BtnListup.Size = new System.Drawing.Size(94, 38);
             this.BtnListup.TabIndex = 7;
@@ -115,7 +115,7 @@
             // 
             this.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDelete.Location = new System.Drawing.Point(679, 3);
+            this.BtnDelete.Location = new System.Drawing.Point(575, 3);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(94, 38);
             this.BtnDelete.TabIndex = 8;
@@ -152,13 +152,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(882, 194);
+            this.panel1.Size = new System.Drawing.Size(778, 194);
             this.panel1.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(112, 17);
+            this.label3.Location = new System.Drawing.Point(15, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(136, 13);
             this.label3.TabIndex = 15;
@@ -166,7 +166,7 @@
             // 
             // BtnSearch
             // 
-            this.BtnSearch.Location = new System.Drawing.Point(404, 27);
+            this.BtnSearch.Location = new System.Drawing.Point(307, 27);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(78, 35);
             this.BtnSearch.TabIndex = 14;
@@ -177,7 +177,7 @@
             // TbSearchPartnumber
             // 
             this.TbSearchPartnumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbSearchPartnumber.Location = new System.Drawing.Point(108, 33);
+            this.TbSearchPartnumber.Location = new System.Drawing.Point(11, 33);
             this.TbSearchPartnumber.MaxLength = 12;
             this.TbSearchPartnumber.Name = "TbSearchPartnumber";
             this.TbSearchPartnumber.Size = new System.Drawing.Size(278, 29);
@@ -188,7 +188,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(510, 4);
+            this.label2.Location = new System.Drawing.Point(401, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(150, 13);
             this.label2.TabIndex = 13;
@@ -202,7 +202,7 @@
             this.panel3.Controls.Add(this.TbPartName1);
             this.panel3.Controls.Add(this.TbPartName3);
             this.panel3.Controls.Add(this.TbPartName2);
-            this.panel3.Location = new System.Drawing.Point(501, 20);
+            this.panel3.Location = new System.Drawing.Point(404, 20);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(279, 161);
             this.panel3.TabIndex = 12;
@@ -238,7 +238,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(888, 666);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 611);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // tableLayoutPanel3
@@ -253,7 +253,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(882, 460);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(778, 405);
             this.tableLayoutPanel3.TabIndex = 14;
             // 
             // tableLayoutPanel2
@@ -271,14 +271,14 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(876, 44);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(772, 44);
             this.tableLayoutPanel2.TabIndex = 14;
             // 
             // RegistrationFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 666);
+            this.ClientSize = new System.Drawing.Size(784, 611);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "RegistrationFrm";
             this.Text = "RegistrationFrm";

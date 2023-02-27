@@ -52,7 +52,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,19 +69,19 @@
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(95, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -96,7 +96,7 @@
             // registrationToolStripMenuItem
             // 
             this.registrationToolStripMenuItem.Name = "registrationToolStripMenuItem";
-            this.registrationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.registrationToolStripMenuItem.Text = "Registration";
             this.registrationToolStripMenuItem.Click += new System.EventHandler(this.registrationToolStripMenuItem_Click);
             // 
@@ -112,14 +112,14 @@
             // instructionManualToolStripMenuItem
             // 
             this.instructionManualToolStripMenuItem.Name = "instructionManualToolStripMenuItem";
-            this.instructionManualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.instructionManualToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.instructionManualToolStripMenuItem.Text = "Instruction manual";
             this.instructionManualToolStripMenuItem.Click += new System.EventHandler(this.instructionManualToolStripMenuItem_Click);
             // 
             // licensedToolStripMenuItem
             // 
             this.licensedToolStripMenuItem.Name = "licensedToolStripMenuItem";
-            this.licensedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licensedToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.licensedToolStripMenuItem.Text = "About";
             this.licensedToolStripMenuItem.Click += new System.EventHandler(this.licensedToolStripMenuItem_Click_1);
             // 
@@ -128,7 +128,7 @@
             this.pnlForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlForm.Location = new System.Drawing.Point(0, 24);
             this.pnlForm.Name = "pnlForm";
-            this.pnlForm.Size = new System.Drawing.Size(884, 737);
+            this.pnlForm.Size = new System.Drawing.Size(784, 737);
             this.pnlForm.TabIndex = 1;
             // 
             // timer1
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 761);
+            this.ClientSize = new System.Drawing.Size(784, 761);
             this.Controls.Add(this.pnlForm);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

@@ -94,6 +94,7 @@
             // 
             this.TbProKey.Location = new System.Drawing.Point(119, 63);
             this.TbProKey.Name = "TbProKey";
+            this.TbProKey.ReadOnly = true;
             this.TbProKey.Size = new System.Drawing.Size(254, 20);
             this.TbProKey.TabIndex = 3;
             this.TbProKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -165,7 +166,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutFrm";
-            this.Text = "About Smart Card Tool ";
+            this.Text = "+";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.About_Load);
             this.ResumeLayout(false);
