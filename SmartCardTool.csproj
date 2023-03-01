@@ -264,8 +264,10 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppSettingsTest.cs" />
     <Compile Include="Models\DBContext.cs" />
+    <Compile Include="Models\HttpResult.cs" />
     <Compile Include="Models\PartNumber.cs" />
     <Compile Include="Models\Pattern.cs" />
+    <Compile Include="Models\ReturnError.cs" />
     <Compile Include="Models\Smartcard.cs" />
     <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Modules\InputDialog.cs" />

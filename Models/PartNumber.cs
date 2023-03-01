@@ -13,5 +13,10 @@ namespace SmartCartTool_API.Models
         [Required, MinLength(19), MaxLength(19)] // 2023-02-16T10:10:10
         public string TimeStamp { get; set; } = null;
 
+        [Required]
+        public string TagID { get; set; } = null;
+
+        [Required]
+        public long TagCount { get; set; }
     }
 }
