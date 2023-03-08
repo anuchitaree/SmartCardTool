@@ -66,14 +66,15 @@
             this.BtnErrorReset = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.BtnIDm = new System.Windows.Forms.Button();
+            this.BtnReadFile = new System.Windows.Forms.Button();
             this.LbAutoRun = new System.Windows.Forms.Label();
+            this.LbInfo = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_M = new System.Windows.Forms.Timer(this.components);
-            this.LbInfo = new System.Windows.Forms.Label();
-            this.BtnIDm = new System.Windows.Forms.Button();
-            this.BtnReadFile = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,20 +87,22 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.LbStatus, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.LbStatus, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.LbAutoRun, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.LbInfo, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.LbInfo, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 948);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -339,7 +342,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 153);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(778, 592);
+            this.panel2.Size = new System.Drawing.Size(778, 492);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -354,7 +357,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(778, 592);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(778, 492);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // LbOK
@@ -364,7 +367,7 @@
             this.LbOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LbOK.Location = new System.Drawing.Point(3, 0);
             this.LbOK.Name = "LbOK";
-            this.LbOK.Size = new System.Drawing.Size(383, 592);
+            this.LbOK.Size = new System.Drawing.Size(383, 492);
             this.LbOK.TabIndex = 1;
             this.LbOK.Text = "OK";
             this.LbOK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -377,7 +380,7 @@
             this.LbNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LbNG.Location = new System.Drawing.Point(392, 0);
             this.LbNG.Name = "LbNG";
-            this.LbNG.Size = new System.Drawing.Size(383, 592);
+            this.LbNG.Size = new System.Drawing.Size(383, 492);
             this.LbNG.TabIndex = 1;
             this.LbNG.Text = "NG";
             this.LbNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -402,10 +405,10 @@
             this.tableLayoutPanel2.Controls.Add(this.BtnErrorReset, 5, 2);
             this.tableLayoutPanel2.Controls.Add(this.button1, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.button2, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BtnIDm, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BtnReadFile, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.BtnIDm, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnReadFile, 3, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 751);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 651);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -436,7 +439,7 @@
             // 
             // BtnReceiveData
             // 
-            this.BtnReceiveData.Location = new System.Drawing.Point(103, 51);
+            this.BtnReceiveData.Location = new System.Drawing.Point(103, 50);
             this.BtnReceiveData.Name = "BtnReceiveData";
             this.BtnReceiveData.Size = new System.Drawing.Size(89, 41);
             this.BtnReceiveData.TabIndex = 5;
@@ -446,7 +449,7 @@
             // 
             // BtnFindDB
             // 
-            this.BtnFindDB.Location = new System.Drawing.Point(203, 51);
+            this.BtnFindDB.Location = new System.Drawing.Point(203, 50);
             this.BtnFindDB.Name = "BtnFindDB";
             this.BtnFindDB.Size = new System.Drawing.Size(89, 41);
             this.BtnFindDB.TabIndex = 5;
@@ -456,7 +459,7 @@
             // 
             // BtnWriteTAG
             // 
-            this.BtnWriteTAG.Location = new System.Drawing.Point(103, 99);
+            this.BtnWriteTAG.Location = new System.Drawing.Point(103, 97);
             this.BtnWriteTAG.Name = "BtnWriteTAG";
             this.BtnWriteTAG.Size = new System.Drawing.Size(89, 42);
             this.BtnWriteTAG.TabIndex = 5;
@@ -466,7 +469,7 @@
             // 
             // BtnSendStock
             // 
-            this.BtnSendStock.Location = new System.Drawing.Point(203, 99);
+            this.BtnSendStock.Location = new System.Drawing.Point(203, 97);
             this.BtnSendStock.Name = "BtnSendStock";
             this.BtnSendStock.Size = new System.Drawing.Size(89, 42);
             this.BtnSendStock.TabIndex = 5;
@@ -476,7 +479,7 @@
             // 
             // BtnAutoRun
             // 
-            this.BtnAutoRun.Location = new System.Drawing.Point(3, 51);
+            this.BtnAutoRun.Location = new System.Drawing.Point(3, 50);
             this.BtnAutoRun.Name = "BtnAutoRun";
             this.BtnAutoRun.Size = new System.Drawing.Size(90, 41);
             this.BtnAutoRun.TabIndex = 4;
@@ -486,7 +489,7 @@
             // 
             // BtnStop
             // 
-            this.BtnStop.Location = new System.Drawing.Point(3, 99);
+            this.BtnStop.Location = new System.Drawing.Point(3, 97);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(90, 42);
             this.BtnStop.TabIndex = 4;
@@ -498,9 +501,9 @@
             // 
             this.BtnErrorReset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnErrorReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnErrorReset.Location = new System.Drawing.Point(631, 99);
+            this.BtnErrorReset.Location = new System.Drawing.Point(631, 97);
             this.BtnErrorReset.Name = "BtnErrorReset";
-            this.BtnErrorReset.Size = new System.Drawing.Size(144, 42);
+            this.BtnErrorReset.Size = new System.Drawing.Size(144, 44);
             this.BtnErrorReset.TabIndex = 3;
             this.BtnErrorReset.Text = "Error Reset";
             this.BtnErrorReset.UseVisualStyleBackColor = true;
@@ -519,7 +522,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(631, 51);
+            this.button2.Location = new System.Drawing.Point(631, 50);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -527,6 +530,27 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // BtnIDm
+            // 
+            this.BtnIDm.Location = new System.Drawing.Point(303, 3);
+            this.BtnIDm.Name = "BtnIDm";
+            this.BtnIDm.Size = new System.Drawing.Size(94, 41);
+            this.BtnIDm.TabIndex = 9;
+            this.BtnIDm.Text = "Read IDm";
+            this.BtnIDm.UseVisualStyleBackColor = true;
+            this.BtnIDm.Visible = false;
+            // 
+            // BtnReadFile
+            // 
+            this.BtnReadFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnReadFile.Location = new System.Drawing.Point(303, 50);
+            this.BtnReadFile.Name = "BtnReadFile";
+            this.BtnReadFile.Size = new System.Drawing.Size(94, 41);
+            this.BtnReadFile.TabIndex = 10;
+            this.BtnReadFile.Text = "Read from file";
+            this.BtnReadFile.UseVisualStyleBackColor = true;
+            this.BtnReadFile.Click += new System.EventHandler(this.BtnReadFile_Click);
             // 
             // LbAutoRun
             // 
@@ -540,6 +564,16 @@
             this.LbAutoRun.TabIndex = 15;
             this.LbAutoRun.Text = "AUTO RUN";
             this.LbAutoRun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LbInfo
+            // 
+            this.LbInfo.AutoSize = true;
+            this.LbInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LbInfo.Location = new System.Drawing.Point(3, 818);
+            this.LbInfo.Name = "LbInfo";
+            this.LbInfo.Size = new System.Drawing.Size(37, 100);
+            this.LbInfo.TabIndex = 16;
+            this.LbInfo.Text = "LbInfo";
             // 
             // timer
             // 
@@ -558,37 +592,15 @@
             // 
             this.timer_M.Tick += new System.EventHandler(this.timer_M_Tick);
             // 
-            // LbInfo
+            // label7
             // 
-            this.LbInfo.AutoSize = true;
-            this.LbInfo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LbInfo.Location = new System.Drawing.Point(3, 898);
-            this.LbInfo.Name = "LbInfo";
-            this.LbInfo.Size = new System.Drawing.Size(37, 20);
-            this.LbInfo.TabIndex = 16;
-            this.LbInfo.Text = "LbInfo";
-            this.LbInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // BtnIDm
-            // 
-            this.BtnIDm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnIDm.Location = new System.Drawing.Point(303, 51);
-            this.BtnIDm.Name = "BtnIDm";
-            this.BtnIDm.Size = new System.Drawing.Size(94, 42);
-            this.BtnIDm.TabIndex = 9;
-            this.BtnIDm.Text = "Read IDm";
-            this.BtnIDm.UseVisualStyleBackColor = true;
-            // 
-            // BtnReadFile
-            // 
-            this.BtnReadFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnReadFile.Location = new System.Drawing.Point(303, 99);
-            this.BtnReadFile.Name = "BtnReadFile";
-            this.BtnReadFile.Size = new System.Drawing.Size(94, 42);
-            this.BtnReadFile.TabIndex = 10;
-            this.BtnReadFile.Text = "Read from file";
-            this.BtnReadFile.UseVisualStyleBackColor = true;
-            this.BtnReadFile.Click += new System.EventHandler(this.BtnReadFile_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 798);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Debug area";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // RunningFrm
             // 
@@ -657,5 +669,6 @@
         private System.Windows.Forms.Label LbInfo;
         private System.Windows.Forms.Button BtnIDm;
         private System.Windows.Forms.Button BtnReadFile;
+        private System.Windows.Forms.Label label7;
     }
 }

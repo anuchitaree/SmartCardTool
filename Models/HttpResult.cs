@@ -8,7 +8,16 @@ namespace SmartCardTool.Models
 {
     public class HttpResult
     {
-        public bool Result { get; set; }
+        public SendHttpResult Result { get; set; }
         public string  Message { get; set; }
+    }
+
+    public enum SendHttpResult
+    {
+        Success,
+        WrongData,
+        Disconnect,
+        Other
+
     }
 }

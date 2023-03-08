@@ -33,7 +33,6 @@ namespace SmartCardTool.Modules
 
         public static string UploadUrl = "";
 
-        public static string RoutePath="";
 
         public static int HoldResultSec = 10 * 60;
     }

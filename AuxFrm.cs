@@ -43,10 +43,6 @@ namespace SmartCardTool
             //var _destinationPath1 = _configuration.GetConnectionString("Email:Host");
 
 
-             
-
-
-
             Label_Version.Text = "ver: " + Application.ProductVersion;
 
             var path =@"D:\Project\SmartCardTool\appsettings.json";

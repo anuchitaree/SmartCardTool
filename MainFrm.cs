@@ -125,7 +125,6 @@ namespace SmartCardTool
                 {
                     DataPath = "C:\\SmartCardTool\\partnumber.txt",
                     UploadUrl = "http://localhost:5217",
-                    RoutePath = "/api/v1/end_write_sub_assy",
                     HoldResultSec =10,
 
                 };
@@ -147,7 +146,6 @@ namespace SmartCardTool
 
                 Param.DataPath = appSettings.Path.DataPath;
                 Param.UploadUrl = appSettings.Path.UploadUrl;
-                Param.RoutePath = appSettings.Path.RoutePath;
                 Param.HoldResultSec=appSettings.Path.HoldResultSec;
             }
         }

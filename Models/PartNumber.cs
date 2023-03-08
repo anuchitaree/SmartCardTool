@@ -14,9 +14,9 @@ namespace SmartCartTool_API.Models
         public string TimeStamp { get; set; } = null;
 
         [Required]
-        public string TagID { get; set; } = null;
+        public string TagId { get; set; } = null;
 
         [Required]
-        public long TagCount { get; set; }
+        public long CountTag { get; set; }
     }
 }
