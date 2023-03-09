@@ -1,9 +1,11 @@
 ﻿using AioiSystems.DotModule;
 using AioiSystems.DotModule.Barcode;
+using Newtonsoft.Json;
 using SmartCardTool.Models;
 using SmartCardTool.Modules;
 using SmartCardTool.Modules.Initial;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
@@ -324,6 +326,95 @@ namespace SmartCardTool.ChildFrm
         private void TbSearchPartnumber_TextChanged(object sender, EventArgs e)
         {
             TbPartName0.Text = TbSearchPartnumber.Text;
+        }
+
+        private async void BtnBackup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var db = new DBContext())
+                {
+                    var existdata = await db.Smartcards.ToListAsync();
+
+                    if (existdata.Count == 0) return;
+
+                    string json = JsonConvert.SerializeObject(existdata, Formatting.Indented);
+
+                    FolderBrowserDialog folderDlg = new FolderBrowserDialog
+                    {
+                        RootFolder = Environment.SpecialFolder.Desktop,
+                        //SelectedPath = @"C:\",
+                        ShowNewFolderButton = true
+                    };
+                    DialogResult result = folderDlg.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string destination = $"{folderDlg.SelectedPath}\\backup-smartcard-database.json";
+                        using (StreamWriter sw = new StreamWriter(destination))
+                        {
+                            sw.WriteLine(json);
+                        }
+                        MessageBox.Show("Backup database completed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Backup database is NOT complete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void BtnRestore_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog1 = new OpenFileDialog
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                    RestoreDirectory = true,
+                    Title = "Browse JSON Files",
+                    DefaultExt = "json",
+                    Filter = "Json files (*.json)|*.json",
+                    FilterIndex = 2
+                };
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = openFileDialog1.FileName;
+                    openFileDialog1.Multiselect = false;
+                    using (StreamReader sr = new StreamReader(fileName))
+                    {
+                        string json = sr.ReadToEnd();
+                        var backupdata = JsonConvert.DeserializeObject<List<Smartcard>>(json);
+                        if (backupdata.Count == 0) return;
+
+                        using (var db = new DBContext())
+                        {
+                            foreach (var item in backupdata)
+                            {
+                                var exist = await db.Smartcards.FirstOrDefaultAsync(x=>x.Partnumber==item.Partnumber);
+                                if (exist != null) continue;
+                                var newrecode = new Smartcard()
+                                {
+                                    Partnumber = item.Partnumber,
+                                    Partname0 = item.Partname0,
+                                    Partname1 = item.Partname1,
+                                    Partname2 = item.Partname2,
+                                    Partname3 = item.Partname3,
+                                };
+                                db.Smartcards.Add(newrecode);
+
+                            }
+                            db.SaveChanges();
+                            MessageBox.Show("Restore database completed.","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                MessageBox.Show("Restore database is NOT complete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

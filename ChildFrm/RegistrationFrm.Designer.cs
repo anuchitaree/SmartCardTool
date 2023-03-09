@@ -47,6 +47,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnBackup = new System.Windows.Forms.Button();
+            this.BtnRestore = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -266,6 +268,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.Controls.Add(this.BtnListup, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnDelete, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnBackup, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnRestore, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -273,6 +277,28 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(772, 44);
             this.tableLayoutPanel2.TabIndex = 14;
+            // 
+            // BtnBackup
+            // 
+            this.BtnBackup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnBackup.Location = new System.Drawing.Point(3, 3);
+            this.BtnBackup.Name = "BtnBackup";
+            this.BtnBackup.Size = new System.Drawing.Size(94, 38);
+            this.BtnBackup.TabIndex = 9;
+            this.BtnBackup.Text = "Backup";
+            this.BtnBackup.UseVisualStyleBackColor = true;
+            this.BtnBackup.Click += new System.EventHandler(this.BtnBackup_Click);
+            // 
+            // BtnRestore
+            // 
+            this.BtnRestore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnRestore.Location = new System.Drawing.Point(103, 3);
+            this.BtnRestore.Name = "BtnRestore";
+            this.BtnRestore.Size = new System.Drawing.Size(94, 38);
+            this.BtnRestore.TabIndex = 10;
+            this.BtnRestore.Text = "Restore";
+            this.BtnRestore.UseVisualStyleBackColor = true;
+            this.BtnRestore.Click += new System.EventHandler(this.BtnRestore_Click);
             // 
             // RegistrationFrm
             // 
@@ -317,5 +343,7 @@
         private System.Windows.Forms.TextBox TbSearchPartnumber;
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BtnBackup;
+        private System.Windows.Forms.Button BtnRestore;
     }
 }
