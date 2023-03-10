@@ -532,14 +532,14 @@ namespace SmartCardTool.ChildFrm
         {
             Param.Pages = 9;
 
-            string path0 = Environment.CurrentDirectory;
+            //string path0 = Environment.CurrentDirectory;
 
-            string path1 = $"{path0}\\{Param.Setting}";
+            //string path1 = $"{path0}\\{Param.Setting}";
 
-            if (!Directory.Exists(path1))
-            {
-                Directory.CreateDirectory(path1);
-            }
+            //if (!Directory.Exists(path1))
+            //{
+            //    Directory.CreateDirectory(path1);
+            //}
 
             string path = Param.DataPath;
 

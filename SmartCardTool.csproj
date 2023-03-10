@@ -17,7 +17,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\SmartCardTool\SmartCardTool\</PublishUrl>
+    <PublishUrl>C:\SmartCardTool\SmarCardTools\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -257,9 +257,9 @@
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202302230357152_Initial.cs" />
-    <Compile Include="Migrations\202302230357152_Initial.designer.cs">
-      <DependentUpon>202302230357152_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202303100207492_Initial.cs" />
+    <Compile Include="Migrations\202303100207492_Initial.designer.cs">
+      <DependentUpon>202303100207492_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppSettingsTest.cs" />
@@ -303,8 +303,8 @@
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302230357152_Initial.resx">
-      <DependentUpon>202302230357152_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303100207492_Initial.resx">
+      <DependentUpon>202303100207492_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

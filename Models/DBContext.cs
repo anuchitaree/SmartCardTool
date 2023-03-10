@@ -4,24 +4,41 @@ namespace SmartCardTool.Models
 {
     public class DBContext : DbContext
     {
-
-
-        public DBContext() : base(nameOrConnectionString: "Default")
+        public DBContext()
+         : base("AppDatabaseConnectionString")
         {
+            //this.schema = schema;
         }
 
-        
+        public DbSet<Smartcard> Smartcards { get; set; }
 
-
-
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder builder)
         {
-            modelBuilder.HasDefaultSchema("public");
+            builder.HasDefaultSchema("public");
+            base.OnModelCreating(builder);
         }
-    
 
-        public DbSet<Smartcard> Smartcards { get; set; } = null;
+        //public DBContext() : base(nameOrConnectionString: "Default")
+        //{
+        //}
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.HasDefaultSchema("public");
+        //}
+
+
+        //public DbSet<Smartcard> Smartcards { get; set; } = null;
+
+
+
+
+
+        //private readonly string schema;
+
+
+
+
 
 
 
