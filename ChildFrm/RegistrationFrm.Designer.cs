@@ -49,6 +49,12 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnBackup = new System.Windows.Forms.Button();
             this.BtnRestore = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -60,26 +66,26 @@
             // 
             // TbPartName0
             // 
-            this.TbPartName0.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbPartName0.Location = new System.Drawing.Point(16, 11);
+            this.TbPartName0.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbPartName0.Location = new System.Drawing.Point(16, 17);
             this.TbPartName0.MaxLength = 12;
             this.TbPartName0.Name = "TbPartName0";
-            this.TbPartName0.Size = new System.Drawing.Size(247, 31);
+            this.TbPartName0.Size = new System.Drawing.Size(247, 29);
             this.TbPartName0.TabIndex = 3;
             // 
             // TbPartName1
             // 
-            this.TbPartName1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbPartName1.Location = new System.Drawing.Point(126, 51);
+            this.TbPartName1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbPartName1.Location = new System.Drawing.Point(125, 61);
             this.TbPartName1.MaxLength = 8;
             this.TbPartName1.Name = "TbPartName1";
-            this.TbPartName1.Size = new System.Drawing.Size(137, 29);
+            this.TbPartName1.Size = new System.Drawing.Size(137, 24);
             this.TbPartName1.TabIndex = 4;
             // 
             // BtnSave
             // 
             this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(689, 131);
+            this.BtnSave.Location = new System.Drawing.Point(689, 139);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(84, 50);
             this.BtnSave.TabIndex = 5;
@@ -127,24 +133,25 @@
             // 
             // TbPartName2
             // 
-            this.TbPartName2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbPartName2.Location = new System.Drawing.Point(126, 87);
+            this.TbPartName2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbPartName2.Location = new System.Drawing.Point(126, 99);
             this.TbPartName2.MaxLength = 8;
             this.TbPartName2.Name = "TbPartName2";
-            this.TbPartName2.Size = new System.Drawing.Size(137, 29);
+            this.TbPartName2.Size = new System.Drawing.Size(137, 24);
             this.TbPartName2.TabIndex = 4;
             // 
             // TbPartName3
             // 
-            this.TbPartName3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbPartName3.Location = new System.Drawing.Point(126, 124);
+            this.TbPartName3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbPartName3.Location = new System.Drawing.Point(126, 140);
             this.TbPartName3.MaxLength = 8;
             this.TbPartName3.Name = "TbPartName3";
-            this.TbPartName3.Size = new System.Drawing.Size(137, 29);
+            this.TbPartName3.Size = new System.Drawing.Size(137, 24);
             this.TbPartName3.TabIndex = 4;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.BtnSearch);
             this.panel1.Controls.Add(this.TbSearchPartnumber);
@@ -162,13 +169,13 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(15, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 13);
+            this.label3.Size = new System.Drawing.Size(243, 13);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Call Part  Number Sub-Assy";
+            this.label3.Text = "Part  Number Sub-Assy(call from Stock monitoring)";
             // 
             // BtnSearch
             // 
-            this.BtnSearch.Location = new System.Drawing.Point(307, 27);
+            this.BtnSearch.Location = new System.Drawing.Point(305, 29);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(78, 35);
             this.BtnSearch.TabIndex = 14;
@@ -190,7 +197,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(401, 6);
+            this.label2.Location = new System.Drawing.Point(401, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(150, 13);
             this.label2.TabIndex = 13;
@@ -199,30 +206,35 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.TbPartName0);
             this.panel3.Controls.Add(this.panel2);
             this.panel3.Controls.Add(this.TbPartName1);
             this.panel3.Controls.Add(this.TbPartName3);
             this.panel3.Controls.Add(this.TbPartName2);
-            this.panel3.Location = new System.Drawing.Point(404, 20);
+            this.panel3.Location = new System.Drawing.Point(404, 17);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(279, 161);
+            this.panel3.Size = new System.Drawing.Size(279, 174);
             this.panel3.TabIndex = 12;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(15, 48);
+            this.panel2.Location = new System.Drawing.Point(15, 61);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(106, 105);
+            this.panel2.Size = new System.Drawing.Size(106, 103);
             this.panel2.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 26);
+            this.label1.Location = new System.Drawing.Point(15, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 42);
             this.label1.TabIndex = 13;
@@ -285,7 +297,7 @@
             this.BtnBackup.Name = "BtnBackup";
             this.BtnBackup.Size = new System.Drawing.Size(94, 38);
             this.BtnBackup.TabIndex = 9;
-            this.BtnBackup.Text = "Backup";
+            this.BtnBackup.Text = "Backup DB";
             this.BtnBackup.UseVisualStyleBackColor = true;
             this.BtnBackup.Click += new System.EventHandler(this.BtnBackup_Click);
             // 
@@ -296,9 +308,63 @@
             this.BtnRestore.Name = "BtnRestore";
             this.BtnRestore.Size = new System.Drawing.Size(94, 38);
             this.BtnRestore.TabIndex = 10;
-            this.BtnRestore.Text = "Restore";
+            this.BtnRestore.Text = "Restore DB";
             this.BtnRestore.UseVisualStyleBackColor = true;
             this.BtnRestore.Click += new System.EventHandler(this.BtnRestore_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(126, 47);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(119, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Row1 max 8 charactors";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(125, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Row2 max 8 charactors";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(122, 124);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Row3 max 8 charactors";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 2);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(132, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Header max 12 charactors";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(19, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "146px/30mm";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(94, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "max 12 charactors";
             // 
             // RegistrationFrm
             // 
@@ -345,5 +411,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnBackup;
         private System.Windows.Forms.Button BtnRestore;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

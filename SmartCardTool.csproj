@@ -257,9 +257,9 @@
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303100207492_Initial.cs" />
-    <Compile Include="Migrations\202303100207492_Initial.designer.cs">
-      <DependentUpon>202303100207492_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202303140401002_Initial.cs" />
+    <Compile Include="Migrations\202303140401002_Initial.designer.cs">
+      <DependentUpon>202303140401002_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppSettingsTest.cs" />
@@ -303,8 +303,8 @@
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303100207492_Initial.resx">
-      <DependentUpon>202303100207492_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303140401002_Initial.resx">
+      <DependentUpon>202303140401002_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

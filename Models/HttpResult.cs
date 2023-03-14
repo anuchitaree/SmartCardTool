@@ -17,7 +17,7 @@ namespace SmartCardTool.Models
         Success,
         WrongData,
         Disconnect,
-        Other
-
+        Other,
+        NoProduction,
     }
 }

@@ -13,7 +13,7 @@ namespace SmartCardTool.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202303100207492_Initial"; }
+            get { return "202303140401002_Initial"; }
         }
         
         string IMigrationMetadata.Source

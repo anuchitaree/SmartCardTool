@@ -153,7 +153,7 @@ namespace SmartCardTool.ChildFrm
                 _request[0] = _request[1] = _request[2] = null;
                 TagCount = 0;
                 TagID = "";
-                LbInfo.Text =String.Empty;
+                LbInfo.Text = String.Empty;
             }
         }
 
@@ -441,7 +441,7 @@ namespace SmartCardTool.ChildFrm
                 _request[0] = _request[1] = _request[2] = null;
                 _images[0] = _images[1] = _images[2] = _images[3] = null;
                 TagID = "";
-                LbInfo.Text =String.Empty;
+                LbInfo.Text = String.Empty;
                 LbStatus.Text = String.Empty;
                 ResetLamp();
                 return;
@@ -923,6 +923,23 @@ namespace SmartCardTool.ChildFrm
                             LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
                             break;
 
+                        case SendHttpResult.NoProduction:
+                            LbStatus.Text = $"Message from StockMonitor : {result.Message}";
+                            LbError.BackColor = Color.FromArgb(255, 0, 0);
+                            LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
+
+                            LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+
+                            if (File.Exists(Param.DataPath))
+                            {
+                                File.Delete(Param.DataPath);
+                            }
+                            Thread.Sleep(1000);
+
+                            timer2.Interval = Param.HoldResultSec;
+                            timer2.Enabled = true;
+                            break;
+
                         case SendHttpResult.Disconnect:
                             LbStatus.Text = STATUSSTOCKDISCONNECTION;
 
@@ -1047,7 +1064,7 @@ namespace SmartCardTool.ChildFrm
 
                                 status = true;
 
-                                if (object1.Status == "ok")
+                                if (object1.Status == "ok" && object1.Detail == "")
                                 {
                                     return new HttpResult()
                                     {
@@ -1055,6 +1072,15 @@ namespace SmartCardTool.ChildFrm
                                         Message = object1.Detail,
                                     };
                                 }
+                                else if (object1.Status == "ng" && object1.Detail == "Parts NO. not production now.")
+                                {
+                                    return new HttpResult()
+                                    {
+                                        Result = SendHttpResult.NoProduction,
+                                        Message = object1.Detail,
+                                    };
+                                }
+
                                 else
                                 {
                                     return new HttpResult()
