@@ -70,11 +70,12 @@
             this.BtnReadFile = new System.Windows.Forms.Button();
             this.LbAutoRun = new System.Windows.Forms.Label();
             this.LbInfo = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_M = new System.Windows.Forms.Timer(this.components);
-            this.label7 = new System.Windows.Forms.Label();
+            this.BtnSmartCard = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -207,7 +208,7 @@
             this.LbReady.Name = "LbReady";
             this.LbReady.Size = new System.Drawing.Size(91, 32);
             this.LbReady.TabIndex = 15;
-            this.LbReady.Text = "Ready";
+            this.LbReady.Text = "SC.Ready";
             this.LbReady.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
@@ -264,9 +265,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Request Partnumber";
+            this.label1.Text = "Part number";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // TbPartName3
@@ -407,6 +408,7 @@
             this.tableLayoutPanel2.Controls.Add(this.button2, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.BtnIDm, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.BtnReadFile, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.BtnSmartCard, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 651);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -419,9 +421,10 @@
             // 
             // BtnAuto
             // 
+            this.BtnAuto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnAuto.Location = new System.Drawing.Point(3, 3);
             this.BtnAuto.Name = "BtnAuto";
-            this.BtnAuto.Size = new System.Drawing.Size(90, 41);
+            this.BtnAuto.Size = new System.Drawing.Size(94, 41);
             this.BtnAuto.TabIndex = 4;
             this.BtnAuto.Text = "AUTO";
             this.BtnAuto.UseVisualStyleBackColor = true;
@@ -429,9 +432,10 @@
             // 
             // BtnManual
             // 
+            this.BtnManual.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnManual.Location = new System.Drawing.Point(103, 3);
             this.BtnManual.Name = "BtnManual";
-            this.BtnManual.Size = new System.Drawing.Size(89, 41);
+            this.BtnManual.Size = new System.Drawing.Size(94, 41);
             this.BtnManual.TabIndex = 5;
             this.BtnManual.Text = "MANUAL";
             this.BtnManual.UseVisualStyleBackColor = true;
@@ -439,9 +443,10 @@
             // 
             // BtnReceiveData
             // 
+            this.BtnReceiveData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnReceiveData.Location = new System.Drawing.Point(103, 50);
             this.BtnReceiveData.Name = "BtnReceiveData";
-            this.BtnReceiveData.Size = new System.Drawing.Size(89, 41);
+            this.BtnReceiveData.Size = new System.Drawing.Size(94, 41);
             this.BtnReceiveData.TabIndex = 5;
             this.BtnReceiveData.Text = "Receive data";
             this.BtnReceiveData.UseVisualStyleBackColor = true;
@@ -449,9 +454,10 @@
             // 
             // BtnFindDB
             // 
+            this.BtnFindDB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnFindDB.Location = new System.Drawing.Point(203, 50);
             this.BtnFindDB.Name = "BtnFindDB";
-            this.BtnFindDB.Size = new System.Drawing.Size(89, 41);
+            this.BtnFindDB.Size = new System.Drawing.Size(94, 41);
             this.BtnFindDB.TabIndex = 5;
             this.BtnFindDB.Text = "Find DB";
             this.BtnFindDB.UseVisualStyleBackColor = true;
@@ -459,9 +465,10 @@
             // 
             // BtnWriteTAG
             // 
+            this.BtnWriteTAG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnWriteTAG.Location = new System.Drawing.Point(103, 97);
             this.BtnWriteTAG.Name = "BtnWriteTAG";
-            this.BtnWriteTAG.Size = new System.Drawing.Size(89, 42);
+            this.BtnWriteTAG.Size = new System.Drawing.Size(94, 44);
             this.BtnWriteTAG.TabIndex = 5;
             this.BtnWriteTAG.Text = "Write TAG";
             this.BtnWriteTAG.UseVisualStyleBackColor = true;
@@ -469,9 +476,10 @@
             // 
             // BtnSendStock
             // 
+            this.BtnSendStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnSendStock.Location = new System.Drawing.Point(203, 97);
             this.BtnSendStock.Name = "BtnSendStock";
-            this.BtnSendStock.Size = new System.Drawing.Size(89, 42);
+            this.BtnSendStock.Size = new System.Drawing.Size(94, 44);
             this.BtnSendStock.TabIndex = 5;
             this.BtnSendStock.Text = "Send Stock";
             this.BtnSendStock.UseVisualStyleBackColor = true;
@@ -479,9 +487,10 @@
             // 
             // BtnAutoRun
             // 
+            this.BtnAutoRun.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnAutoRun.Location = new System.Drawing.Point(3, 50);
             this.BtnAutoRun.Name = "BtnAutoRun";
-            this.BtnAutoRun.Size = new System.Drawing.Size(90, 41);
+            this.BtnAutoRun.Size = new System.Drawing.Size(94, 41);
             this.BtnAutoRun.TabIndex = 4;
             this.BtnAutoRun.Text = "AUTO RUN";
             this.BtnAutoRun.UseVisualStyleBackColor = true;
@@ -489,9 +498,10 @@
             // 
             // BtnStop
             // 
+            this.BtnStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnStop.Location = new System.Drawing.Point(3, 97);
             this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(90, 42);
+            this.BtnStop.Size = new System.Drawing.Size(94, 44);
             this.BtnStop.TabIndex = 4;
             this.BtnStop.Text = "STOP";
             this.BtnStop.UseVisualStyleBackColor = true;
@@ -548,7 +558,7 @@
             this.BtnReadFile.Name = "BtnReadFile";
             this.BtnReadFile.Size = new System.Drawing.Size(94, 41);
             this.BtnReadFile.TabIndex = 10;
-            this.BtnReadFile.Text = "Read from file";
+            this.BtnReadFile.Text = "Read from memory";
             this.BtnReadFile.UseVisualStyleBackColor = true;
             this.BtnReadFile.Click += new System.EventHandler(this.BtnReadFile_Click);
             // 
@@ -575,6 +585,16 @@
             this.LbInfo.TabIndex = 16;
             this.LbInfo.Text = "LbInfo";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 798);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Debug area";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
@@ -592,15 +612,16 @@
             // 
             this.timer_M.Tick += new System.EventHandler(this.timer_M_Tick);
             // 
-            // label7
+            // BtnSmartCard
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 798);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Debug area";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnSmartCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnSmartCard.Location = new System.Drawing.Point(203, 3);
+            this.BtnSmartCard.Name = "BtnSmartCard";
+            this.BtnSmartCard.Size = new System.Drawing.Size(94, 41);
+            this.BtnSmartCard.TabIndex = 11;
+            this.BtnSmartCard.Text = "Initial SmartCard";
+            this.BtnSmartCard.UseVisualStyleBackColor = true;
+            this.BtnSmartCard.Click += new System.EventHandler(this.BtnSmartCard_Click);
             // 
             // RunningFrm
             // 
@@ -670,5 +691,6 @@
         private System.Windows.Forms.Button BtnIDm;
         private System.Windows.Forms.Button BtnReadFile;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button BtnSmartCard;
     }
 }
