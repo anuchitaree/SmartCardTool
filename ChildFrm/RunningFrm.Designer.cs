@@ -68,6 +68,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.BtnIDm = new System.Windows.Forms.Button();
             this.BtnReadFile = new System.Windows.Forms.Button();
+            this.BtnSmartCard = new System.Windows.Forms.Button();
             this.LbAutoRun = new System.Windows.Forms.Label();
             this.LbInfo = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_M = new System.Windows.Forms.Timer(this.components);
-            this.BtnSmartCard = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -149,7 +149,7 @@
             // 
             this.LbCompleted.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LbCompleted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LbCompleted.Location = new System.Drawing.Point(544, 55);
+            this.LbCompleted.Location = new System.Drawing.Point(565, 55);
             this.LbCompleted.Name = "LbCompleted";
             this.LbCompleted.Size = new System.Drawing.Size(91, 32);
             this.LbCompleted.TabIndex = 15;
@@ -160,7 +160,7 @@
             // 
             this.LbSendToStock.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LbSendToStock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LbSendToStock.Location = new System.Drawing.Point(453, 55);
+            this.LbSendToStock.Location = new System.Drawing.Point(466, 55);
             this.LbSendToStock.Name = "LbSendToStock";
             this.LbSendToStock.Size = new System.Drawing.Size(91, 32);
             this.LbSendToStock.TabIndex = 15;
@@ -171,7 +171,7 @@
             // 
             this.LbWriteTag.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LbWriteTag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LbWriteTag.Location = new System.Drawing.Point(362, 55);
+            this.LbWriteTag.Location = new System.Drawing.Point(374, 55);
             this.LbWriteTag.Name = "LbWriteTag";
             this.LbWriteTag.Size = new System.Drawing.Size(91, 32);
             this.LbWriteTag.TabIndex = 15;
@@ -182,7 +182,7 @@
             // 
             this.LbFindDB.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LbFindDB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LbFindDB.Location = new System.Drawing.Point(271, 55);
+            this.LbFindDB.Location = new System.Drawing.Point(282, 55);
             this.LbFindDB.Name = "LbFindDB";
             this.LbFindDB.Size = new System.Drawing.Size(91, 32);
             this.LbFindDB.TabIndex = 15;
@@ -193,7 +193,7 @@
             // 
             this.LbReceived.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LbReceived.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LbReceived.Location = new System.Drawing.Point(180, 55);
+            this.LbReceived.Location = new System.Drawing.Point(190, 55);
             this.LbReceived.Name = "LbReceived";
             this.LbReceived.Size = new System.Drawing.Size(91, 32);
             this.LbReceived.TabIndex = 15;
@@ -210,6 +210,7 @@
             this.LbReady.TabIndex = 15;
             this.LbReady.Text = "SC.Ready";
             this.LbReady.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LbReady.Click += new System.EventHandler(this.LbReady_Click);
             // 
             // label6
             // 
@@ -562,6 +563,17 @@
             this.BtnReadFile.UseVisualStyleBackColor = true;
             this.BtnReadFile.Click += new System.EventHandler(this.BtnReadFile_Click);
             // 
+            // BtnSmartCard
+            // 
+            this.BtnSmartCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnSmartCard.Location = new System.Drawing.Point(203, 3);
+            this.BtnSmartCard.Name = "BtnSmartCard";
+            this.BtnSmartCard.Size = new System.Drawing.Size(94, 41);
+            this.BtnSmartCard.TabIndex = 11;
+            this.BtnSmartCard.Text = "Initial SmartCard";
+            this.BtnSmartCard.UseVisualStyleBackColor = true;
+            this.BtnSmartCard.Click += new System.EventHandler(this.BtnSmartCard_Click);
+            // 
             // LbAutoRun
             // 
             this.LbAutoRun.AutoSize = true;
@@ -611,17 +623,6 @@
             // timer_M
             // 
             this.timer_M.Tick += new System.EventHandler(this.timer_M_Tick);
-            // 
-            // BtnSmartCard
-            // 
-            this.BtnSmartCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnSmartCard.Location = new System.Drawing.Point(203, 3);
-            this.BtnSmartCard.Name = "BtnSmartCard";
-            this.BtnSmartCard.Size = new System.Drawing.Size(94, 41);
-            this.BtnSmartCard.TabIndex = 11;
-            this.BtnSmartCard.Text = "Initial SmartCard";
-            this.BtnSmartCard.UseVisualStyleBackColor = true;
-            this.BtnSmartCard.Click += new System.EventHandler(this.BtnSmartCard_Click);
             // 
             // RunningFrm
             // 

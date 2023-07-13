@@ -911,7 +911,9 @@ namespace SmartCardTool.ChildFrm
 
                     LbStatus.Text = STATUSPROCESS;
                     LbWriteTag.BackColor = Color.FromArgb(255, 255, 0);
-                    LbReady.BackColor = Color.FromArgb(255, 255, 255);
+                    LbWriteTag.Refresh();
+                    LbReady.BackColor = Color.FromArgb(255, 255, 0);
+                    LbReady.Refresh();
                     LbError.BackColor = Color.White;
 
                     this.Refresh();
@@ -921,10 +923,11 @@ namespace SmartCardTool.ChildFrm
 
                     LbStatus.Text = STATUSCOMPLETED;
                     LbOK.BackColor = Color.FromArgb(85, 255, 85);
-
+                    LbOK.Refresh();
 
                     LbNG.BackColor = Color.FromArgb(42, 0, 0);
                     LbNG.ForeColor = Color.FromArgb(60, 60, 60);
+                    LbNG.Refresh();
                     TagCount += 1;
                     _adapter.CloseCard();
 
@@ -948,10 +951,18 @@ namespace SmartCardTool.ChildFrm
                     {
                         case SendHttpResult.Success:
                             LbStatus.Text = $"Message from StockMonitor : {result.Message}";
+
                             LbSendToStock.BackColor = Color.FromArgb(255, 255, 0);
+                            LbSendToStock.Refresh();
+
                             Sound(Param.CompleteSound);
-                            LbCompleted.BackColor = Color.FromArgb(85, 255, 85);
-                            LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+
+
+                            LbCompleted.BackColor = Color.FromArgb(85, 255, 85); // Green
+                            LbCompleted.Refresh();
+                            LbAutoRun.BackColor = Color.FromArgb(255, 255, 255); // ดับ
+                            LbAutoRun.Refresh();    
+
                             Thread.Sleep(1000);
 
                             if (File.Exists(Param.DataPath))
@@ -967,17 +978,27 @@ namespace SmartCardTool.ChildFrm
                         case SendHttpResult.WrongData:
                             LbStatus.Text = $"Message from StockMonitor : {result.Message}";
                             LbError.BackColor = Color.FromArgb(255, 0, 0);
+                            LbError.Refresh();
+
                             LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
+                            LbSendToStock.Refresh();
+
 
                             LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+                            LbAutoRun.Refresh();
+
                             break;
 
                         case SendHttpResult.NoProduction:
                             LbStatus.Text = $"Message from StockMonitor : {result.Message}";
                             LbError.BackColor = Color.FromArgb(255, 0, 0);
+                            LbError.Refresh();
+
                             LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
+                            LbSendToStock.Refresh();
 
                             LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+                            LbAutoRun.Refresh();
 
                             if (File.Exists(Param.DataPath))
                             {
@@ -993,9 +1014,17 @@ namespace SmartCardTool.ChildFrm
                             LbStatus.Text = STATUSSTOCKDISCONNECTION;
 
                             LbSendToStock.BackColor = Color.FromArgb(255, 0, 0);
+                            LbSendToStock.Refresh();
+
                             LbError.BackColor = Color.FromArgb(255, 0, 0);
+                            LbError.Refresh();
+
                             LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+                            LbAutoRun.Refresh();
+
                             LbCompleted.BackColor = Color.FromArgb(255, 255, 255);
+                            LbCompleted.Refresh();
+
 
                             _fault = true;
                             break;
@@ -1014,10 +1043,20 @@ namespace SmartCardTool.ChildFrm
 
                     LbStatus.Text = ex.Message;
                     LbError.BackColor = Color.Red;
+                    LbError.Refresh();
+
                     LbAutoRun.BackColor = Color.FromArgb(255, 255, 255);
+                    LbAutoRun.Refresh();
+
                     LbReady.BackColor = Color.White;
+                    LbReady.Refresh();
+
                     LbNG.BackColor = Color.Red;
+                    LbNG.Refresh();
+
                     LbOK.BackColor = Color.Black;
+                    LbOK.Refresh();
+
                     _scReady = false;
                     var result = await ExecuteWithRetryAsync(HttpPostMode.Abnormal, $"Error : {ex.Message}", "", 0);
                     if (result.Result == SendHttpResult.Other)
@@ -1222,6 +1261,11 @@ namespace SmartCardTool.ChildFrm
         private void BtnSmartCard_Click(object sender, EventArgs e)
         {
             InitSmartCardReader();
+        }
+
+        private void LbReady_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public enum HttpPostMode
