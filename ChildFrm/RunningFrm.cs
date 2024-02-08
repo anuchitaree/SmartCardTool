@@ -1105,7 +1105,8 @@ namespace SmartCardTool.ChildFrm
                         var data1 = new PartNumber()
                         {
                             PartNoSubAssy = _request[0],
-                            LotId = Convert.ToInt32(_request[1] == null ? "0" : _request[1]),
+                            //LotId = Convert.ToInt32(_request[1] == null ? "0" : _request[1]),
+                            LotId = _request[1] == null ? "0" : _request[1],
                             TimeStamp = _request[2],
                             TagId = TagId == null ? "" : TagId,
                             CountTag = TagCount
@@ -1118,7 +1119,9 @@ namespace SmartCardTool.ChildFrm
                         var data2 = new ReturnError()
                         {
                             PartNoSubAssy = _request[0],
-                            LotId = Convert.ToInt32(_request[1] == null ? "0" : _request[1]),
+                            //LotId = Convert.ToInt32(_request[1] == null ? "0" : _request[1]),
+                            LotId = _request[1] == null ? "0" : _request[1],
+
                             Detail = reson,
 
                         };

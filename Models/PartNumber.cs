@@ -8,7 +8,8 @@ namespace SmartCartTool_API.Models
         public string PartNoSubAssy { get; set; } = null;
 
         [Required]
-        public int LotId { get; set; }
+        //public int LotId { get; set; }
+        public string LotId { get; set; }
 
         [Required, MinLength(19), MaxLength(19)] // 2023-02-16T10:10:10
         public string TimeStamp { get; set; } = null;

@@ -13,7 +13,9 @@ namespace SmartCardTool.Models
         public string PartNoSubAssy { get; set; } = null;
 
         [Required]
-        public long LotId { get; set; }
+        //public long LotId { get; set; }
+        public string LotId { get; set; }
+
 
         [Required] // 2023-02-16T10:10:10
         public string Detail { get; set; } = null;
