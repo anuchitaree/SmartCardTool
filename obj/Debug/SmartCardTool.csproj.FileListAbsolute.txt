@@ -81,3 +81,4 @@ D:\Project\ploy\SmartCardTool\obj\Debug\SmartCardTool.application
 D:\Project\ploy\SmartCardTool\obj\Debug\SmartCar.CB7D7EDF.Up2Date
 D:\Project\ploy\SmartCardTool\obj\Debug\SmartCardTool.exe
 D:\Project\ploy\SmartCardTool\obj\Debug\SmartCardTool.pdb
+D:\Project\ploy\SmartCardTool\obj\Debug\SmartCardTool.exe.config
